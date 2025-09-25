@@ -1,604 +1,641 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="id">
 <head>
   <meta charset="utf-8">
-  <title>SMC Lawfirm</title>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <link rel="icon" type="image/x-icon" href="img/wr.png">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Personal Profile</title>
   <style>
-    body {
-      font-family: 'Open Sans', sans-serif;
-      color: #333;
-    }
-    h1, h2, h3, h4 {
-      font-family: 'Playfair Display', serif;
-    }
-    .navbar {
-      background-color: #0b2545; /* navy */
-    }
-    .navbar a {
-      color: #fff !important;
-      font-weight: 500;
-    }
-    .hero {
-      background: url('https://source.unsplash.com/1600x800/?law,justice') center/cover no-repeat;
-      color: white;
-      text-align: center;
-      /* padding: 120px 20px; */
-      position: relative;
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(11, 37, 69, 0.7);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-    .btn-gold {
-      background-color: #c5a46d;
-      color: #fff;
-      font-weight: 600;
-    }
-    .btn-gold:hover {
-      background-color: #b38c4a;
-      color: #fff;
-    }
-    .section-title {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .footer {
-      background: #0b2545;
-      color: #ddd;
-      padding: 40px 0;
-    }
-    .footer a {
-      color: #c5a46d;
-      text-decoration: none;
-    }
-    .hero-slide {
-        height: 100vh;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 100%;
-    }
-    .bg-gold {
-    background-color: #eecf1f;
-    }
-    .bg-gold .card {
-    background: #fff;
-    }
-    .bg-gold .section-title h2 {
-    color: #222;
-    }
-    .whatsapp-float {
-        position: fixed;
-        width: 60px;
-        height: 60px;
-        bottom: 20px;
-        right: 20px;
-        /* background-color: #25d366; */
-        color: #fff;
-        border-radius: 50px;
-        text-align: center;
-        font-size: 30px;
-        /* box-shadow: 2px 2px 5px rgba(0,0,0,0.3); */
-        z-index: 1000;
+    .summary {
+      text-align: justify;
+      text-justify: inter-word;
+      -webkit-text-align-last: left;
+      text-align-last: left;
+      hyphens: auto;
+      line-height: 1.7;
     }
 
-    .whatsapp-float i {
-        margin-top: 16px;
+    @media (max-width: 576px) {
+      .summary {
+        font-size: 0.98rem;
+      }
+    }
+
+    /* --- FIXED LAYOUT --- */
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    /* Sidebar kiri tetap fixed */
+    nav.sidebar-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      width: 25%; /* sama dengan col-md-3 */
+    }
+
+    /* Konten kanan scroll */
+    main.content {
+      margin-left: 25%; /* kasih jarak sesuai lebar sidebar */
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    /* Responsif untuk HP */
+    @media (max-width: 768px) {
+      nav.sidebar-fixed {
+        position: static;
+        width: 100%;
+        height: auto;
+      }
+      main.content {
+        margin-left: 0;
+      }
     }
   </style>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top">
-  <div class="container">
-    <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
-      <!-- Logo kiri -->
-      <img src="img/wr.png" alt="Logo" style="height: 35px; margin-right: 8px;">
-      <span>SMC Lawfirm</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
-        <li class="nav-item"><a href="#services" class="nav-link">Practice Areas</a></li>
-        <li class="nav-item"><a href="#team" class="nav-link">Our Lawyers</a></li>
-        <li class="nav-item"><a href="#clients" class="nav-link">Client</a></li>
-        <li class="nav-item"><a href="#awards" class="nav-link">Awards</a></li>
-        
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar kiri -->
+    <nav class="sidebar-fixed bg-dark text-light p-4 d-none d-md-block">
+      <div class="text-center">
+        <img src="img/profile.jpg" class="rounded-circle mb-3 border border-warning border-3" alt="Foto Profil" width="200" height="200">
+        <h4 class="text-warning">SETIAWAN JODI FAKHAR, S.H. CPM.</h4>
+        <p class="text-warning">Pengacara</p>
+      </div>
+      <hr class="border-light">
+      <h5 class="text-warning">Contact Me</h5>
+      <p>Email: email@domain.com</p>
+      <p>Phone: +62 812-3456-789</p>
+      <p>Location: Jakarta</p>
+      
+      <h5 class="text-warning">Education</h5>
+      <p><strong>2017 – 2022</strong> -  UIN Banten<br><ul><li>Hukum Tata Negara</li></ul></p>
+      <p><strong>2014 - 2017</strong> - MA Al-Ihya Kaduronyok Cisata<br><ul><li>Ilmu Pengetahuan Sosial</li></ul></p>
+
+      <h5 class="text-warning">Professional Education</h5>
+      <p><strong>Juni 2025</strong>  <ul> <li>Sumpah Advokat Pengadilan Tinggi Banten PERADI SAI Kota Serang, Banten</li></ul>  </p>
+      <p><strong>Mei 2025</strong>  <ul> <li>Pendidikan Mediator Non Hakim oleh FHP Mediasi Jakarta</li></ul> </p>
+            <p><strong>Mei 2025</strong>  <ul> <li>Mengikuti Pembekalan Standar Penanganan Perkara dan Kode Etik Advokat diselenggarakan oleh
+            LBH DPP BAPEKSI</li></ul> </p>
+      <p><strong>Januari 2025</strong>  <ul> <li>Lulus Ujian Profesi Advokat PERADI Suara Advokat Indonesia (SAI) Jakarta Barat</li></ul> </p>
+      <p><strong>Agustus 2024</strong>  <ul> <li> Pendidikan Khusus Profesi Advokat PERADI Kota Serang, Banten</li></ul></p>
+
+      <h5 class="text-warning">Hard Skills</h5>
+      <ul>
+        <li>Advokasi dan Mediasi</li>
+        <li>Legal Drafting dan Litigasi</li>
+        <li>Penelitian dan Analisis Hukum</li>
+        <li>Konten Edukasi Hukum dan Komunikasi Publik</li>
+        <li>Penulisan dan Jurnalistik</li>
+        <li>Video Editing dan Desain Grafis</li>
+        <li>Microsoft Office</li>
       </ul>
-    </div>
-  </div>
-</nav>
 
+      <h5 class="text-warning">Soft Skills</h5>
+      <ul>
+        <li>Manajemen Organisasi dan Kepemimpinan</li>
+        <li>Public Speaking dan Penyuluhan Hukum</li>
+        <li>Kreativitas </li>
+        <li>Problem Solving</li>
+      </ul>
+    </nav>
 
-<!-- Hero -->
-<section id="home" class="hero">
-  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
-    <div class="carousel-inner">
-
-      <!-- Slide 1 -->
-      <div class="carousel-item active">
-        <div class="hero-slide" style="background-image: url('img/bg-car.jpg');">
-          <div class="hero-content text-center text-white d-flex flex-column justify-content-center align-items-center h-100">
-            <h1 class="display-4 fw-bold">Trusted Legal Solutions</h1>
-            <p class="lead">Your partner in law, justice, and corporate matters.</p>
-            <!-- <a href="#contact" class="btn btn-gold btn-lg mt-3">Consult Now</a> -->
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 2 -->
-      <div class="carousel-item">
-        <div class="hero-slide" style="background-image: url('img/bg-car2.jpg');">
-          <div class="hero-content text-center text-white d-flex flex-column justify-content-center align-items-center h-100">
-            <h1 class="display-4 fw-bold text-dark">Corporate & Business Law</h1>
-            <p class="lead text-dark">Providing reliable legal counsel for your company growth.</p>
-            <!-- <a href="#services" class="btn btn-gold btn-lg mt-3">Explore Services</a> -->
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3 -->
-      <div class="carousel-item">
-        <div class="hero-slide" style="background-image: url('img/bg-car3.jpg');">
-          <div class="hero-content text-center text-white d-flex flex-column justify-content-center align-items-center h-100">
-            <h1 class="display-4 fw-bold">Litigation & Dispute Resolution</h1>
-            <p class="lead">Expert representation in court and mediation.</p>
-            <!-- <a href="#about" class="btn btn-gold btn-lg mt-3">Learn More</a> -->
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
-  </div>
-</section>
-
-
-<!-- About Us -->
-<section id="about" class="py-5">
-  <div class="container">
-    <div class="section-title">
-      <h2>About Us</h2>
-      <p>SMC Lawfirm is dedicated to providing professional legal services with integrity, commitment, and excellence.</p>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-6">
-        <img src="img/abc.jpg" class="img-fluid rounded shadow">
-      </div>
-      <div class="col-md-6">
-        <h3>Our Vision & Mission</h3>
-        <p>We aim to be a leading law firm recognized for client service, legal expertise, and ethical values. Our mission is to protect client interests and deliver tailored solutions in various legal areas.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- <section id="services" class="py-5 bg-gold">
-  <div class="container">
-    <div class="section-title text-center mb-5">
-      <h2>Practice Areas</h2>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card shadow h-100">
-          <div class="card-body text-center">
-            <i class="fas fa-gavel fa-2x text-primary mb-3"></i>
-            <h5>Corporate Law</h5>
-            <p>Comprehensive legal services for businesses, contracts, and compliance.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card shadow h-100">
-          <div class="card-body text-center">
-            <i class="fas fa-balance-scale fa-2x text-primary mb-3"></i>
-            <h5>Litigation</h5>
-            <p>Representing clients in disputes, arbitration, and court proceedings.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card shadow h-100">
-          <div class="card-body text-center">
-            <i class="fas fa-handshake fa-2x text-primary mb-3"></i>
-            <h5>Consultation</h5>
-            <p>Tailored advice for individuals, families, and businesses on legal matters.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-<!-- Services -->
-<section id="services" class="py-5 bg-light">
-    <div class="container">
-    <div class="section-title text-center mb-5">
-        <h2>Practice Areas</h2>
-    </div>
-    <div class="row g-4">
-
-        <!-- Corporate Law -->
-        <div class="col-md-4">
-        <div class="card shadow h-100">
-            <div class="card-body text-center">
-            <i class="fas fa-gavel fa-2x text-primary mb-3"></i>
-            <h5>Corporate Law</h5>
-            <p>Company formation, contracts, mergers & compliance services.</p>
-            </div>
-        </div>
-        </div>
-
-        <!-- Criminal Law -->
-        <div class="col-md-4">
-        <div class="card shadow h-100">
-            <div class="card-body text-center">
-            <i class="fas fa-balance-scale fa-2x text-primary mb-3"></i>
-            <h5>Criminal Law</h5>
-            <p>Defense in criminal cases, fraud, violence, and legal representation in court.</p>
-            </div>
-        </div>
-        </div>
-
-        <!-- Civil Law -->
-        <div class="col-md-4">
-        <div class="card shadow h-100">
-            <div class="card-body text-center">
-            <i class="fas fa-home fa-2x text-primary mb-3"></i>
-            <h5>Civil Law</h5>
-            <p>Property disputes, contracts, inheritance, and family civil cases.</p>
-            </div>
-        </div>
-        </div>
-
-        <!-- Intellectual Property -->
-        <div class="col-md-4">
-        <div class="card shadow h-100">
-            <div class="card-body text-center">
-            <i class="fas fa-lightbulb fa-2x text-primary mb-3"></i>
-            <h5>Intellectual Property</h5>
-            <p>Copyrights, trademarks, patents, and industrial designs protection.</p>
-            </div>
-        </div>
-        </div>
-
-        <!-- Family Law -->
-        <div class="col-md-4">
-        <div class="card shadow h-100">
-            <div class="card-body text-center">
-            <i class="fas fa-users fa-2x text-primary mb-3"></i>
-            <h5>Family Law</h5>
-            <p>Divorce, child custody, and estate planning services.</p>
-            </div>
-        </div>
-        </div>
-
-        <!-- Employment Law -->
-        <div class="col-md-4">
-        <div class="card shadow h-100">
-            <div class="card-body text-center">
-            <i class="fas fa-briefcase fa-2x text-primary mb-3"></i>
-            <h5>Employment Law</h5>
-            <p>Employment contracts, labor disputes, and employee rights guidance.</p>
-            </div>
-        </div>
-        </div>
-
-    </div>
-    </div>
-</section>
-<!-- <section id="services" class="py-5 bg-light">
-  <div class="container">
-    <div class="section-title">
-      <h2>Practice Areas</h2>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card shadow h-100">
-          <div class="card-body text-center">
-            <i class="fas fa-gavel fa-2x text-primary mb-3"></i>
-            <h5>Corporate Law</h5>
-            <p>Comprehensive legal services for businesses, contracts, and compliance.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card shadow h-100">
-          <div class="card-body text-center">
-            <i class="fas fa-balance-scale fa-2x text-primary mb-3"></i>
-            <h5>Litigation</h5>
-            <p>Representing clients in disputes, arbitration, and court proceedings.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card shadow h-100">
-          <div class="card-body text-center">
-            <i class="fas fa-handshake fa-2x text-primary mb-3"></i>
-            <h5>Consultation</h5>
-            <p>Tailored advice for individuals, families, and businesses on legal matters.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-<!-- =========================
-     Team / Our Lawyers
-============================== -->
-<section id="team" class="py-5">
-  <div class="container">
-    <div class="section-title text-center mb-5">
-      <h2>Our Lawyers</h2>
-      <p>Meet our experienced team of legal professionals</p>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-3">
-        <div class="card shadow h-100 text-center">
-          <img src="img/team-1.jpg" class="card-img-top" alt="Lawyer 1" style="height: 250px; object-fit: contain;">
-
-          <div class="card-body" style="font-size: 12px;">
-            <h5 class="card-title" style="font-size: 12px;">John Doe</h5>
-            <p class="card-text">Corporate & Business Law</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card shadow h-100 text-center">
-          <img src="img/team-1.jpg" class="card-img-top" alt="Lawyer 1" style="height: 250px; object-fit: contain;">
-
-
-          <div class="card-body" style="font-size: 12px;">
-            <h5 class="card-title" style="font-size: 12px;">Jane Smith</h5>
-            <p class="card-text">Criminal & Litigation</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card shadow h-100 text-center">
-          <img src="img/team-1.jpg" class="card-img-top" alt="Lawyer 1" style="height: 250px; object-fit: contain;">
-
-          <div class="card-body" style="font-size: 12px;">
-            <h5 class="card-title" style="font-size: 12px;">Michael Lee</h5>
-            <p class="card-text">Intellectual Property</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card shadow h-100 text-center">
-          <img src="img/team-1.jpg" class="card-img-top" alt="Lawyer 1" style="height: 250px; object-fit: contain;">
-
-          <div class="card-body" style="font-size: 12px;">
-            <h5 class="card-title" style="font-size: 12px;">Michael Lee</h5>
-            <p class="card-text">Intellectual Property</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="clients" class="py-5 bg-light">
-  <div class="container text-center">
-    <h2 class="mb-4 fw-bold">Our Clients</h2>
-    <p class="text-muted mb-5">Trusted by companies and individuals from various industries</p>
-    <div class="row g-4 justify-content-center align-items-center">
-      <div class="col-4 col-md-2">
-        <img src="img/wr.png" class="img-fluid grayscale" alt="Client 1">
-      </div>
-      <div class="col-4 col-md-2">
-        <img src="img/wr.png" class="img-fluid grayscale" alt="Client 2">
-      </div>
-      <div class="col-4 col-md-2">
-        <img src="img/wr.png" class="img-fluid grayscale" alt="Client 3">
-      </div>
-      <div class="col-4 col-md-2">
-        <img src="img/wr.png" class="img-fluid grayscale" alt="Client 4">
-      </div>
-      <div class="col-4 col-md-2">
-        <img src="img/wr.png" class="img-fluid grayscale" alt="Client 5">
-      </div>
-        <div class="col-4 col-md-2">
-        <img src="img/wr.png" class="img-fluid grayscale" alt="Client 1">
-        </div>
-        <div class="col-4 col-md-2">
-        <img src="img/wr.png" class="img-fluid grayscale" alt="Client 2">
-        </div>
-        <div class="col-4 col-md-2">
-        <img src="img/wr.png" class="img-fluid grayscale" alt="Client 3">
-        </div>
-        <div class="col-4 col-md-2">
-        <img src="img/wr.png" class="img-fluid grayscale" alt="Client 4">
-        </div>
-        <div class="col-4 col-md-2">
-        <img src="img/wr.png" class="img-fluid grayscale" alt="Client 5">
-        </div>
-    </div>
-  </div>
-</section>
-
-<section id="reviews" class="py-5 bg-dark text-white">
-  <div class="container">
-    <h2 class="text-center fw-bold mb-4">What Our Clients Say</h2>
-    <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-
-        <!-- Review 1 -->
-        <div class="carousel-item active text-center">
-          <p class="lead fst-italic">“SMC Lawfirm memberikan solusi cepat dan profesional untuk masalah hukum perusahaan kami. Sangat direkomendasikan.”</p>
-          <h5 class="mt-3 fw-bold">- John Doe, CEO XYZ Corp</h5>
-        </div>
-
-        <!-- Review 2 -->
-        <div class="carousel-item text-center">
-          <p class="lead fst-italic">“Tim yang ramah, detail, dan selalu siap membantu. Membuat kami merasa aman dalam setiap urusan hukum.”</p>
-          <h5 class="mt-3 fw-bold">- Sarah L., Entrepreneur</h5>
-        </div>
-
-        <!-- Review 3 -->
-        <div class="carousel-item text-center">
-          <p class="lead fst-italic">“Pendampingan litigasi yang luar biasa, hasil melebihi ekspektasi kami. Terima kasih SMC Lawfirm.”</p>
-          <h5 class="mt-3 fw-bold">- Ahmad R., Business Owner</h5>
-        </div>
-
-      </div>
-
-      <!-- Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
+    <!-- Konten kanan -->
+    <main class="content col-md-9 p-4 bg-light">
+      <!-- Tombol sidebar untuk HP -->
+      <button class="btn btn-default mb-3 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+        ☰ 
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
-    </div>
-  </div>
-</section>
 
-<!-- =========================
-    Awards / Recognitions
-============================== -->
-<section id="awards" class="py-5">
-  <div class="container">
-    <div class="section-title text-center mb-5">
-      <h2>Awards & Recognitions</h2>
-      <p>Our achievements and industry recognitions</p>
+      <h2>SETIAWAN JODI FAKHAR, S.H. CPM.</h2>
+        <h5 class="text-muted">Summary</h5>
+        <p class="summary">Sarjana Hukum Tata Negara UIN SMH Banten | Mahasiswa Pascasarjana Hukum UNPAS | Pengacara & Mediator | Founder Macan Keadilan | Host Sultan TV
+        Sapaan akrabnya Santri Lawyer adalah seorang profesional hukum yang aktif sebagai Advokat di Peradi SAI dan Mediator Non-Hakim di Fokus Utama Mediasi Indonesia. Saat ini menjabat sebagai Ketua LBH BAPEKSI DKI Jakarta, LBH PKC PMII Banten dan Managing Partner di Santri Law Office. Selain itu, saya juga seorang konten kreator dan host di Sultan TV, serta pendiri Macan Keadilan Indonesia yang fokus pada advokasi publik dan edukasi hukum melalui media digital.</p>
+
+    <h3 class="mb-4">Pengalaman Kerja</h3>
+
+    <!-- LBH PKC -->
+    <div class="mb-5">
+    <h5 class="fw-bold">LBH PKC PMII Banten</h5>
+    <p class="mb-1"><strong>Direktur</strong> — Juni 2025 | Kota Serang, Provinsi Banten</p>
+        <ul>
+            <li>Bertindak sebagai Kuasa Hukum dalam berbagai kasus pidana dan perdata: membuat Legal Opinion, Surat
+                Kuasa Khusus, Somasi, dan dokumen litigasi lainnya.
+            </li>
+            <li>Mendampingi <strong>pelaporan kasus kekerasan terhadap perempuan di Unit PPA Polres Lebak-Banten.</strong></li>
+            <li>Menangani <strong>kasus penipuan penukaran uang baru saat Idul Fitri dengan total kerugian Rp55 juta</strong>,
+                berhasil mendapatkan komitmen pengembalian dana dengan jaminan sertifikat hak milik.</li>
+            <li>Membuat somasi atas <strong>kasus pemerasan dan ancaman oleh agency (kerugian Rp75 juta), serta kasus
+                penggelapan gadai objek wisata (kerugian Rp40 juta)</strong>, dengan rencana gugatan sederhana di Pengadilan
+                Negeri Tangerang dan Pandeglang.
+            </li>
+            <li>Membuat Surat Penangguhan Penahanan, Eksepsi, dan Pleidoi dalam <strong>perkara anak (No. 30/Pid.SusAnak/2025/PN Srg), dengan hasil putusan seringan-ringannya</strong>.</li>
+            <li>Menangani <strong>kasus percaloan tenaga kerja di Kabupaten Serang dengan pencapaian keberhasilan
+                pengembalian seluruh kerugian klien sebesar Rp20 juta</strong>.</li>
+        </ul>
     </div>
-    <div class="row g-4 text-center">
-      <div class="col-md-3">
-        <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
-        <h5>Best Law Firm 2023</h5>
-        <p>Recognized by Legal Experts Association</p>
-      </div>
-      <div class="col-md-3">
-        <i class="fas fa-award fa-3x text-warning mb-3"></i>
-        <h5>Top Corporate Lawyers</h5>
-        <p>Awarded by Business Law Review</p>
-      </div>
-      <div class="col-md-3">
-        <i class="fas fa-medal fa-3x text-warning mb-3"></i>
-        <h5>Excellence in Litigation</h5>
-        <p>National Legal Awards 2022</p>
-      </div>
-      <div class="col-md-3">
-        <i class="fas fa-certificate fa-3x text-warning mb-3"></i>
-        <h5>Client Choice Award</h5>
-        <p>Voted by our satisfied clients</p>
-      </div>
+
+    <!-- Sultan TV -->
+    <div class="mb-5">
+        <h5 class="fw-bold">Sultan TV</h5>
+        <p class="mb-1"><strong>Host Podcast</strong> — Mei 2024 | Jakarta Pusat, DKI Jakarta</p>
+            <ul>
+                <li><strong>Membuat Program: <em>Santri Lawyer Podcast</em></strong> Podcast edukasi hukum yang menghadirkan tokoh-tokoh dari latar
+                    belakang pesantren, aktivisme, dan masyarakat adat guna menjembatani nilai-nilai kebangsaan dan hukum
+                    modern. Fokus utama program ini adalah menyuarakan pemikiran kritis santri dan masyarakat adat terhadap
+                    isu-isu hukum kontemporer.</li>
+                <li><strong>Episode unggulan:</strong> <i>“Melawan Radikalisme di Era Digital”</i> bersama <strong>Ken Setiawan</strong> (Pendiri NII Crisis
+                    Center), <i>“Perempuan Bersuara di Tengah Krisis Hukum”</i> bersama <strong>Winah Setiawati, S.H.</strong> (Advokat & Ketua PKC
+                    PMII Banten), <i>“Implementasi Nilai Pancasila di Desa Adat Tenganan Bali”</i> bersama <strong>I Ketut Sudiastika</strong> (Kepala
+                    Desa Adat) dan <strong>I Kadek Ramadana Vikaram DS, S.H.</strong> (JD Partners).</li>
+                <li><strong>Membuat Program: Podvokat (Podcast Advokat)</strong>,Podcast ini mengupas seluk-beluk profesi advokat, mulai
+                    dari dilema etika, reformasi hukum, hingga dinamika organisasi profesi. Podvokat dirancang untuk menjadi
+                    ruang reflektif bagi advokat muda, praktisi hukum, dan mahasiswa hukum.</li>
+                <li><strong>Beberapa episode unggulan:</strong> <i>“Dilema Pengurusan Sertifikat Tanah”</i> bersama <strong>Zeriko Hutapea, S.H., M.H.</strong>
+                    (Akademisi UKRIDA), <i>BAS Advokat Dibekukan: Apakah Karier Tamat?”</i> bersama <strong>Dr. Anwar Sadat Tanjung S.H.</strong>,
+                <i>“Revisi UU TNI: Ancaman Dwi Fungsi ABRI?”</i> bersama Lalu <strong>Hartawan Mandala Putra, S.H.</strong>, <i>“Perlindungan
+                    Hukum bagi Jurnalis”</i> bersama <strong>Dedi Dermawan, S.H.</strong>, <i>“Polemik Larangan Buka Warung Saat Ramadan di Kota
+                    Serang”</i> bersama <strong>Erwan Haryadi, S.H.</strong></li>
+            </ul>
     </div>
-  </div>
-</section>
-<!-- Footer Start -->
-<div class="container-fluid footer py-5" style="background-color:#0b2545;">
-  <div class="container py-5">
-    <!-- Social Media -->
-    <div class="row g-5 mb-5 align-items-center">
-      <div class="col-lg-12">
-        <div class="d-flex align-items-center justify-content-center justify-content-lg-end">
-          <a class="btn btn-secondary btn-md-square rounded-circle me-3" href=""><i class="fab fa-facebook-f text-white"></i></a>
-          <a class="btn btn-secondary btn-md-square rounded-circle me-3" href=""><i class="fab fa-twitter text-white"></i></a>
-          <a class="btn btn-secondary btn-md-square rounded-circle me-3" href="https://www.instagram.com/smc.lawfirm?igsh=NWI2bnI4b3M2b3c="><i class="fab fa-instagram text-white"></i></a>
-          <a class="btn btn-secondary btn-md-square rounded-circle me-0" href=""><i class="fab fa-linkedin-in text-white"></i></a>
+
+    <!-- LBH BAPEKSI -->
+    <div class="mb-5">
+        <h5 class="fw-bold">LBH BAPEKSI DKI Jakarta</h5>
+        <p class="mb-1"><strong>Ketua Bidang Hukum</strong> — Januari 2024 | Jakarta Pusat, DKI Jakarta</p>
+        <ul>
+            <li>Menyusun <strong>Legal Opinion, Surat Kuasa Khusus, dan Permohonan Penetapan Perwalian</strong> atas kepentingan
+            anak di bawah umur di Pengadilan Negeri Jakarta Selatan, termasuk menyertakan yurisprudensi Mahkamah
+            Agung terkait izin penjualan harta waris anak.
+            </li>
+            <li>Menyusun <strong>Surat Kuasa Khusus (SKK), Somasi I dan II</strong> dalam perkara <strong>wanprestasi</strong> (Pasal 1243
+            KUHPerdata) dan <strong>dugaan penipuan</strong> (Pasal 378 KUHP) atas kasus pinjam-meminjam uang dalam hubungan
+            personal, dengan pendekatan hukum perdata dan pidana.
+            </li>
+            <li>Menyusun SKK yang memberikan <strong>kewenangan penuh</strong> untuk tindakan hukum dalam aspek perdata dan
+            pidana, serta menyusun somasi kepada pihak debitur dalam rangka pemulihan hak klien.
+            </li>
+            <li>Membuat <strong>draft Duplik</strong> dalam perkara <strong>perceraian</strong> No. 143/Pdt.G/2025/PA.RKS di Pengadilan Agama
+            Rangkasbitung, dengan argumentasi hukum berdasarkan <strong>Kompilasi Hukum Islam (KHI), KUHPerdata</strong>,
+            dan yurisprudensi MA terkait unsur perselisihan terus-menerus dan validitas alat bukti.</li>
+            <li>Menerima konsultasi hukum dan menyusun <strong>somasi</strong> dari empat karyawan PT terkait <strong>pemotongan gaji
+            sepihak dan pembayaran THR yang tidak sesuai</strong>, berdasarkan Permenaker No. 6 Tahun 2016.</li>
+            <li>Mewakili klien dalam perkara <strong>pelecehan seksual verbal dan non-fisik</strong>, serta menyusun somasi berdasarkan
+            <strong>UU No. 12 Tahun 2022 tentang TPKS (Pasal 4–7)</strong>.</li>
+            <li>Memberikan pendampingan hukum dan membuat somasi untuk klien dalam kasus <strong>utang-piutang disertai
+            ancaman</strong>, dengan dasar Pasal 1242 KUHPer tentang wanprestasi dan Pasal 378 KUHP tentang penipuan</li>
+            <li>Menangani kasus serupa untuk klien, dalam perkara utang piutang dengan unsur penipuan, mengacu pada
+            ketentuan wanprestasi dan pasal penipuan dalam KUHP.
+            </li>
+            <li>Menjadi <strong>kuasa hukum Klien</strong>, korban tindak pidana pembacokan di Pasar Kambing Depok, yang telah
+            dilaporkan ke Polres Depok sesuai dengan ketentuan Pasal 351 KUHP tentang penganiayaan.</li>
+        </ul>
+    </div>
+
+    <!-- Dirgayati H. Lase & Partners -->
+    <div class="mb-5">
+        <h5 class="fw-bold">Dirgayati H. Lase & Partners</h5>
+        <p class="mb-1"><strong>Associate</strong> — Januari 2024 – April 2025 | Jakarta Pusat, DKI Jakarta</p>
+        <ul>
+            <li>Bertanggung jawab dalam penyusunan berbagai dokumen hukum penting, seperti <strong>Surat Kuasa Khusus,
+                Somasi I & II</strong>, serta <strong>gugatan wanprestasi dan Perbuatan Melawan Hukum (PMH)</strong> berdasarkan Pasal
+                1365 KUHPerdata, termasuk dalam perkara pidana seperti <strong>penipuan dan/atau penggelapan</strong> berdasarkan
+                Pasal 378 KUHP.
+            </li>
+            <li>Melaksanakan <strong>konsultasi hukum secara langsung kepada klien individu dan korporasi</strong>, termasuk dalam
+                penyusunan kontrak kerja, legal compliance, serta strategi penyelesaian sengketa perdata dan ketenagakerjaan.
+            </li>
+            <li>Terlibat aktif dalam <strong>produksi dan kurasi konten edukasi hukum</strong> untuk kanal media sosial DHL Partners,
+                termasuk <strong>reels, script video, podcast, dan flyer hukum populer</strong>, dengan fokus pada penyuluhan hukum
+                perdata, pidana, hingga isu kontemporer seperti restorative justice dan UU ITE.
+            </li>
+            <li>Beberapa konten edukatif yang dibuat berhasil <strong>menjangkau ribuan audiens</strong>, dan digunakan sebagai bahan
+                sosialisasi oleh mahasiswa dan komunitas hukum di berbagai daerah.
+            </li>
+            <li>Diundang sebagai <strong>pembicara di forum kampus</strong> dan pelatihan hukum untuk mahasiswa dalam topik Legal
+                Career Building dan Personal Branding untuk Advokat Muda di Era Digital.
+            </li>
+            <li>Meraih penghargaan nasional <strong>Indonesia Pro Bono Rising Stars 2024</strong> dari Hukum Online atas kontribusi
+                nyata dalam pemberian bantuan hukum cuma-cuma kepada masyarakat tidak mampu.
+            </li>
+            <li><strong>Membuat dan memandu acara Podcast interaktif</strong> bersama tokoh masyarakat adat di <strong>Desa Adat
+                Tenganan, Bali</strong>, dengan tema: “Implementasi Nilai-Nilai Pancasila di Kehidupan Sosial Desa Adat Tenganan”, yang
+                diselenggarakan pada <strong>Jumat, 21 Februari 2025</strong>.
+                Podcast ini bertujuan untuk menggali praktik nyata nilai-nilai Pancasila dalam struktur hukum adat dan
+                kehidupan bermasyarakat, sekaligus memperkenalkan peran hukum adat sebagai bagian integral dari sistem
+                hukum nasional.
+            </li>
+        </ul>
+    </div>
+
+    <!-- NWK & CO Law Office -->
+    <div class="mb-5">
+        <h5 class="fw-bold">NWK & CO Law Office</h5>
+        <p class="mb-1"><strong>Partners</strong> — Januari 2023 | Jakarta Pusat, DKI Jakarta</p>
+        <ul>
+            <li><strong>Membuat laporan ke Bawaslu RI terkait kasus pengeroyokan saksi Prabowo-Gibran di Tapanuli
+                Tengah</strong> dan mempublikasikannya dalam video viral (280k views di TikTok).
+            </li>
+            <li>Mendampingi tersangka kasus narkotika di Serang Banten, mendampingi proses pelimpahan berkas dari
+                kepolisian ke Kejaksaan.
+            </li>
+            <li><strong>Menangani kasus dugaan fitnah terhadap mahasiswi Poltekkes Banten yang dituduh mencuri Rp50
+                Ribu</strong> tanpa dasar hukum jelas, termasuk membuat Surat Kuasa Khusus, Somasi, dan podcast investigatif
+                “Detik-detik Isma Dituduh Sebagai Pencuri.”
+            </li>
+            <li>Beberapa konten edukatif yang dibuat berhasil <strong>menjangkau ribuan audiens</strong>, dan digunakan sebagai bahan
+                sosialisasi oleh mahasiswa dan komunitas hukum di berbagai daerah.
+            </li>
+            <li>Menginisiasi berbagai konten edukasi hukum, opini publik, dan breaking news melalui video, vlog, dan podcast
+                antara lain terkait:
+            </li>
+            - Kriminalisasi aktivis lingkungan Daniel Frits Tangklisa (Karimunjawa)
+            - Kasus dugaan kekerasan oleh suster terhadap anak <br>
+            - Kasus pengeroyokan oleh oknum suporter sepak bola terhadap pengacara Usna Agus Setiawan, SH, MH<br>
+            - Pengeroyokan ustaz oleh oknum bank keliling<br>
+            - Isu pinjaman online dan rentenir di Banten<br>
+            - Podcast “Rakyat Cibaliung Ujung Kulon Menggugat Calon Kepala Daerah<br>
+            - Aktif dalam forum diskusi publik, termasuk menjadi pembicara Talk Show “Pilih Aku Jadi Walikotamu”
+            di Rumah Dunia, Serang.<br>
+            - Menghasilkan konten edukasi hukum, salah satunya: “Apa Hukuman Bagi Mahasiswa yang Melakukan Plagiat Skripsi?<br>
+            
+        </ul>
+    </div>
+
+    <!-- Widjaja, Effendy & Mukianto Law Firm -->
+    <div class="mb-5">
+        <h5 class="fw-bold">Widjaja, Effendy & Mukianto Law Firm</h5>
+        <p class="mb-1"><strong>Associate</strong> - September 2023 – April 2024 | Jakarta Pusat, DKI Jakarta</p>
+        <ul>
+            <li>Mendampingi klien dalam penyelesaian sengketa dengan Pelaku Usaha Jasa Keuangan (PUJK) sektor
+                perbankan terkait pelelangan objek Hak Tanggungan secara non-litigasi. Terlibat langsung dalam proses litigasi
+                pada berbagai tingkat persidangan.
+            </li>
+            <li>Membantu dan mendampingi Senior Associate agenda pembacaan pledoi, replik, duplik, dan putusan dalam
+                perkara penipuan (Pasal 372 KUHP) di PN Jakarta Timur.
+            </li>
+            <li>Membantu penyusunan replik dan kesimpulan dalam perkara PMH (Pasal 1365 KUHPerdata) di PN Jakarta Pusat.
+            </li>
+            <li>Membantu penyusunan memori banding dan memori Peninjauan Kembali (PK) dalam perkara PMH, termasuk
+                perkara No. 566/Pdt.G/2023/PN.Jkt.Pst dan No. 400/Pdt.G/2020/PN.Jkt.Sel
+            </li>
+            <li>Mendampingi proses mediasi di Polda Metro Jaya terkait peredaran obat ilegal tanpa izin BPOM berdasarkan
+                UU No. 17 Tahun 2023 tentang Kesehatan
+            </li>
+            <li>Membuat berbagai dokumen hukum, antara lain
+            </li>
+            - Legal Opinion atas dugaan tindak pidana penipuan (Pasal 378 KUHP) <br>
+            - Somasi wanprestasi & PMH (Pasal 1239 & 1365 KUHPerdata)<br>
+            - Surat kuasa khusus dalam perkara ITE, narkotika, dan pencemaran nama baik<br>
+            - Draft Legal Review mengenai struktur kepemilikan PMA dan PMDN antara PT Zhongtai Chemical dan
+                PT Nusantara Zhongtai Chemical
+                Mewakili firma dalam kerja sama strategis dan konten edukasi hukum:<br>
+            - Menjalin kerja sama dengan iNews dan Indonesian Book Party untuk produksi konten hukum dan
+            pendirian yayasan berbadan hukum<br>
+            - Menulis feature untuk Managing Director WIEM, Ghea Giasty Italiane, dalam rangka penghargaan
+            Hukumonline NexGen Lawyers 2024<br>
+            - Melakukan riset dan dokumentasi hukum, termasuk permintaan salinan putusan PN Jakarta Pusat No.
+            12/PidB/TPK/2008 untuk keperluan penulisan artikel ilmiah.
+        </ul>
+    </div>
+
+    <!-- Admin Secretary -->
+    <div class="mb-5">
+        <h5 class="fw-bold">Admin Secretary</h5>
+        <p class="mb-1"><strong>Admin Secretary</strong> - Oktober 2023 – Desember 2023</p>
+        <ul>
+            <li>Menyusun berbagai dokumen hukum dan administratif seperti Surat Kuasa, Surat Pernyataan, Struktur
+                Organisasi Perusahaan, serta mengurus NPWP Perusahaan ke KPP Pratama Gambir I Jakarta untuk keperluan
+                pendaftaran Himpunan Konsultan Hukum Pasar Modal (HKHPM) ke OJK.
+            </li>
+            <li>Melaksanakan Mengawal hingga terbitnya Surat Tanda Terdaftar Profesi Penunjang Pasar Modal (Konsultan
+                Hukum a.n Jandi Mukianto, S.H., M.H., C.L.A.) oleh OJK.
+            </li>
+            <li>Menjalankan kewajiban rutin perusahaan terkait pajak (PPh 21 & 23), BPJS Ketenagakerjaan & Kesehatan,
+                serta pelaporan kewajiban bulanan ke DJP.
+            </li>
+            <li>Membuat dan mengajukan permohonan dokumen Visa (Sponsor, Pernyataan Visa, Visa Izin Suami) ke
+                Kedutaan Besar Australia.
+            </li>
+            <li>Mengelola konten sosial media dan branding firma hukum dengan produksi video pendek, poster hukum, dan
+                deskripsi edukatif mengenai isu hukum terkini.
+            </li>
+            <li>Melakukan korespondensi resmi dengan OJK (Wisma Mulia) dan BPR Bank Sinpo (Graha Senatama) untuk
+                kepentingan klien dan firma hukum.
+            </li>
+            <li>Mengurus administrasi keanggotaan HKHPM, termasuk pengambilan kartu anggota di Sekretariat Menara
+                Imperium Jakarta.
+            </li>
+        </ul>
+    </div>
+
+    <h3 class="mb-4">Pengalaman Magang</h3>
+
+    <!-- Kantor hukum AM Munir & Rekan -->
+    <div class="mb-5">
+    <h5 class="fw-bold">Kantor hukum AM Munir & Rekan</h5>
+    <p class="mb-1"><strong>Legal Internship</strong> — Juni – Desember 2022 | Kabupaten Pandeglang, Banten</p>
+        <ul>
+            <li>Mendampingi Kuasa Hukum dalam perkara Tata Usaha Negara terkait pemberhentian perangkat desa di
+                Kecamatan Sobang, Pandeglang, termasuk mendokumentasikan proses persidangan di PTUN Serang dan
+                mempublikasikannya melalui media sosial firma hukum.
+            </li>
+            <li>Bertindak sebagai Koordinator Aliansi Jurnalis Banten Bersatu dalam peliputan konflik agraria antara
+                masyarakat Grenyang Pelabuhan dan PT Berlian Sarana Utama, yang disertai aksi demonstrasi.</li>
+            <li>Menghadiri konferensi pers Kepolisian Daerah Banten terkait pengungkapan kasus narkoba lintas provinsi
+                (penangkapan 7 pengedar dan penyitaan 43 kg sabu).
+            </li>
+            <li>Menjadi produser sekaligus host dalam sejumlah podcast edukatif bersama Dr. Misbakhul Munir, S.H., M.H.,
+                membahas isu hukum aktual seperti:
+            </li>
+            - Tantangan Sarjana Hukum di Era Digital <br>
+            - Upaya Hukum terhadap Pinjaman Online Ilegal<br>
+            - Tindak Pidana Penyebaran Konten Pornografi<br>
+            - Poligami dalam Perspektif Hukum Islam<br>
+            - Analisis Hukum Kasus Pesulap Merah vs Gus Samsudin<br>
+            - Perlindungan Hukum terhadap Korban Kekerasan di Pesantren<br>
+            - Kasus Penangkapan Anak Kiai Jombang<br>
+        </ul>
+    </div>
+
+    <!-- PT Visi Siber Banten (BantenNews.com) -->
+    <div class="mb-5">
+    <h5 class="fw-bold">PT Visi Siber Banten (BantenNews.com)</h5>
+    <p class="mb-1"><strong>Legal Internship</strong> — Januari – Juni 2021 | Kota Serang, Banten</p>
+        <ul>
+            <li>Menjadi Kameramen dan Audioman dalam <i>Podcast</i> Wakil Rakyat yang berjudul <i>“Saya Terperosok di Politik”</i>
+                dengan Ahmad Jazuli Abdillah sebagai Narasumber.
+            </li>
+            <li>Menjadi Kameramen dan Audioman dalam <i>Podcast</i> Wakil Rakyat yang berjudul <i>“Potret Pelayanan Kesehatan di
+                Banten”</i> dengan Fitron Nur Ikhsan sebagai Narasumber.</li>
+            <li>Menjadi Kameramen dan Audioman dalam <i>Podcast</i> Wakil Rakyat yang berjudul <i>“Mana Lebih Penting: Rumah
+                Sakit, Jalan atau Sport Center”</i> dengan Dede Rohana Putra sebagai Narasumber
+            </li>
+            <li>Menjadi Kameramen dan Audioman dalam <i>Podcast</i> Wakil Rakyat yang berjudul <i>“Keuangan Pemerintah Provinsi
+                Banten Mengkhawatirkan?”</i> dengan Gembong Rudiansyah Sumedi sebagai Narasumber.
+            </li>
+        </ul>
+    </div>
+
+    <!-- Publikasi Artikel -->
+    <div class="mb-5">
+        <h5 class="fw-bold">Publikasi Artikel/Buku/Karya Tulis Ilmiah/Opini/Berita</h5>
+        <p class="summary">
+            Aktif menulis artikel opini, esai hukum, feature, hingga resensi buku yang dipublikasikan di berbagai media nasional
+            daring seperti Hukumonline.com, Kumparan, KurungBuka.com, dan Golagongkreatif.com. Tulisantulisan ini membahas beragam isu aktual seperti perlindungan hukum bagi aktivis dan buruh, hak imunitas, keadilan
+            ekologis, hingga dinamika peraturan perundang-undangan.
+            Selain itu, turut menerbitkan karya tulis dalam bentuk antologi buku puisi, feature perjalanan, dan esai sosialpolitik. Gaya penulisan yang berpijak pada pengalaman advokasi dan pendekatan humanistik memperkuat
+            kontribusi dalam mendekatkan wacana hukum kepada publik. Beberapa publikasi yang menonjol antara lain: <br>
+            - “Tinjauan Fikih Ekologi terhadap Pencabutan Izin Pertambangan di Kawasan Hutan Lindung Raja Ampat”<br>
+            – Hukumonline.com (2025)<br>
+            - “Quo Vadis Putusan MK Dosen PNS Bisa Jadi Advokat” – Hukumonline.com (2025)<br>
+            - “Hak Imunitas Buruh Perempuan dalam Kasus Septia Dwi Pertiwi vs Jhon LBF” – KurungBuka.com (2025)<br>
+            - “Resensi Buku: Rehabilitasi vs Penjara” – Kumparan.com (2024)<br>
+            - “Peraturan Daerah Bernuansa Keagamaan dan Hak Kemasyarakatan” – Hukumonline.com (2024)<br>
+            - Buku: “My Job My Adventure” – Antologi Catatan Perjalanan, Gong Publishing (2021)<br>
+            - Buku Puisi: “Munajat Sepanjang Hayat” – Lumbung Banten (2022)<br>
+        </p>
+    </div>
+
+    <!-- Pengalaman Profesional Terkait Lainnya -->
+    <div class="mb-5">
+        <h5 class="fw-bold">Pengalaman Profesional Terkait Lainnya</h5>
+        <p class="summary">
+            Memiliki pengalaman lintas bidang yang memperkuat kemampuan komunikasi publik, produksi konten kreatif,
+            serta kerja lintas sektor budaya, media, dan edukasi:
+        </p>
+        <ul>
+            <li>
+                <strong>Influencer Badan Narkotika Nasional (BNN RI)</strong>
+                <p>Berperan sebagai peliput independen dalam kegiatan pengungkapan kasus dan pemusnahan barang bukti
+                    narkotika selama masa kepemimpinan Komjen Pol. Martinus Hukom. Aktif membagikan edukasi publik terkait
+                    bahaya narkoba melalui media sosial.</p>
+            </li>
+            <li>
+                <strong>Pemeran Tambahan Film Nasional</strong>
+                <p>Turut ambil bagian dalam dua film layar lebar Indonesia: <br>
+                    -  Balada Si Roy (2022) produksi IDN Pictures – bersama Abidzar Al-Ghifari, Kiki Narendra, dan Febby
+                        Rastanty, disutradarai Fajar Nugros. <br>
+                    - Yuni (2021) produksi Fourcolours Films – disutradarai oleh Ifa Isfansyah.
+                </p>
+            </li>
+            <li>
+                <strong>Pelatihan Menulis dan Karya Antologi</strong>
+                <p>Lulus Pelatihan Kelas Menulis Rumah Dunia (Angkatan 33, 2018) dengan fokus materi: penulisan berita, esai,
+                    puisi, cerpen, dan novel. Menerbitkan buku antologi perjalanan bertajuk My Job My Adventure (2019) hasil
+                    eksplorasi lintas daerah di Indonesia.</p>
+            </li>
+            <li>
+                <strong>Pelatihan Konten Kreator Cagar Budaya</strong>
+                <p>Mengikuti Pelatihan Konten Kreator dari Balai Pelestarian Cagar Budaya Banten (24 Maret 2022), membahas
+                    strategi komunikasi digital, produksi video edukatif, dan pelestarian nilai budaya lokal melalui media kreatif.</p>
+            </li>
+        </ul>
+    </div>
+
+        <!-- Pengalaman Presentasi/Pembicara -->
+    <div class="mb-5">
+        <h5 class="fw-bold">Pengalaman Presentasi/Pembicara</h5>
+        <p class="summary">
+            Aktif sebagai narasumber dan pembicara dalam berbagai forum akademik, literasi, hukum, dan sosial
+            kemasyarakatan, baik tingkat universitas, organisasi masyarakat, hingga lembaga negara. Fokus materi mencakup
+            isu advokasi, literasi hukum, media digital, pendidikan, serta pengabdian masyarakat.
+        </p>
+        <ul>
+            <li>
+                <strong>Topik Advokasi, Hukum & Kepemudaan:</strong>
+                <p>
+                    - Pembicara Webinar DEMA Universitas Sultan Maulana Hasanuddin Banten: Penguatan Peran Advokat dalam
+                    Rancangan Undang-Undang Advokat. <br>
+                    - Pembicara Penyuluhan Hukum di Rutan Kelas I Salemba Jakarta Pusat bersama LBH LKRA: Upaya
+                    Hukum terhadap Hak-Hak Narapidana.<br>
+                    - Pembicara Kajian Hukum oleh Legal Education Indonesia: Tips & Trik Menulis Artikel Hukum di Hukum
+                    Online.<br>
+                    - Pemateri Kajian Hukum PR PMII Syariah UIN Banten: Membuat Artikel Hukum yang Menarik dan Informatif
+                    agar Dimuat di Media Massa.<br>
+                    - Pembicara Safari Mahasiswa Pergerakan oleh PMII Syariah: Berproses untuk Berkembang dan Tumbuh.<br>
+                    - Pemateri Seminar Jurnalistik oleh HMJ HES UIN Banten: Urgensi Jurnalistik dalam Moderasi Beragama pada
+                    Generasi Z.<br>
+                    - Pembicara HES Festival UIN Banten: Meningkatkan Personal Branding sebagai Mahasiswa Hukum di Era
+                    Digital.<br>
+                </p>
+            </li>
+            <li>
+                <strong>Topik Literasi, Media & Sosial:</strong>
+                <p>
+                    - Pembicara Webinar UKM PRIMA UIN Banten: Manajemen Media Sosial.<br>
+                    - Pemateri Kemah Riset Studi Kawasan UKM PRIMA UIN Banten di SDN Cilayang 1: Meningkatkan Minat
+                    Literasi Anak.<br>
+                    - Pemateri Kemah Riset Studi Kawasan di SDN Sanding 2 Serang: Meningkatkan Minat Baca Anak Guna
+                    Mencetak Generasi yang Berprestasi (15 Agustus 2023).<br>
+                    - Pembicara Safari Literasi Rumah Dunia di Ponpes Ashidiqiyyah: Meningkatkan Minat Literasi Para Santri.<br>
+                    - Pemateri Latihan Dasar Kepemimpinan Siswa di Ponpes Al-Ihya Pandeglang: Public Speaking dan Melek
+                    Literasi Digital.<br>
+                    - Pembicara Komunikasi Mengabdi UNTIRTA Serang di Kampung Pegadungan: Kepedulian Lingkungan &
+                    Literasi Digital Masyarakat.<br>
+                    - Pemateri Kemah Riset Studi Kawasan UKM PRIMA UIN Banten: Dedikasi Mahasiswa Melalui Ilmu
+                    Pengetahuan dan Kepekaan Sosial.<br>
+                </p>
+            </li>
+        </ul>
+    </div>
+
+    <h3 class="mb-4">Pengalaman Organisasi</h3>
+
+    <!-- Era Indonesia Emas -->
+    <div class="mb-5">
+    <h5 class="fw-bold">Era Indonesia Emas </h5>
+    <p class="mb-1"><strong>Personal Assistant </strong> — Oktober 2023 | Kota Jakarta Pusat, DKI Jakarta</p>
+        <ul>
+            <li>Mengurus legalitas organisasi, termasuk pembuatan NPWP, NIB, dan pembukaan rekening organisasi di Bank
+                Central Asia.
+            </li>
+            <li>Mendampingi dan mendokumentasikan kegiatan kampanye politik Era Lolita Suryana sebagai Caleg DPRD
+                DKI Jakarta (Dapil 9: Tambora, Cengkareng, Kalideres), serta mengelola publikasi digital melalui akun
+                Instagram @lolitadiary
+            </li>
+        </ul>
+    </div>
+
+    <!-- Komunitas Rumah Dunia  -->
+    <div class="mb-5">
+    <h5 class="fw-bold">Komunitas Rumah Dunia  </h5>
+    <p class="mb-1"><strong>Volunteer </strong> — Mei 2019 – September 2023 | Kota Serang, Banten</p>
+        <ul>
+            <li>Menjadi content creator pada acara peresmian Kampung Literasi di Desa Sindangsari, Serang.
+            </li>
+            <li>Menyusun silabus dan menjadi konseptor Kelas Menulis Angkatan 39 untuk materi jurnalistik, cerpen, novel, dan puisi.
+            </li>
+            <li>Bertindak sebagai promotor Perpustakaan Keliling bekerja sama dengan UKM Pusat Riset Mahasiswa UIN
+                SMH Banten.
+            </li>
+            <li>Konseptor Bincang Puisi bertema “Penyair Perempuan, Tradisi dan Digitalisasi” bersama Perempuan Penyair
+                Indonesia.</li>
+            <li>Konten kreator kunjungan Pendampingan Literasi Kantor Bahasa Banten di Rumah Dunia.</li>
+            <li>Konseptor acara Ramadhan “Nyenyore dan Kado Lebaran Rumah Dunia”, mencakup pencarian narasumber
+                dan sponsor.</li>
+            <li>Asisten pribadi Gol A Gong (Duta Baca Indonesia 2021–2022), mengelola konten video dan desain untuk Gol
+                A Gong TV.</li>
+            <li>Pembawa acara YouTube <i>Dunia Relawan</i> dan program Instagram <i>Salam dari Rumah Dunia</i></li>
+            <li>Penanggung jawab kegiatan “Minggu Ceria Membaca Buku Bersama” bekerja sama dengan berbagai lembaga
+                literasi Banten.</li>
+        </ul>
+    </div>
+
+    <!-- Legal Education Indonesia  -->
+    <div class="mb-5">
+    <h5 class="fw-bold">Legal Education Indonesia  </h5>
+    <p class="mb-1"><strong>Sekertaris Jenderal </strong> — September 2019 – September 2020 | Kota Serang, Banten</p>
+        <ul>
+            <li>Melakukan audiensi dengan anggota DPRD Banten, DR. Ahmad Jazuli Abdillah untuk memperluas jangkauan
+                organisasi.
+            </li>
+            <li>Menyelenggarakan webinar membahas PERDA Kota Serang No. 2 Tahun 2010 terkait larangan buka warung
+                di bulan Ramadhan.
+            </li>
+        </ul>
+    </div>
+
+    <!-- Unit Kegiatan Mahasiswa Pusat Riset Mahasiswa  -->
+    <div class="mb-5">
+    <h5 class="fw-bold">Unit Kegiatan Mahasiswa Pusat Riset Mahasiswa  </h5>
+    <p class="mb-1"><strong>Sekertaris Departemen III </strong> — Januari 2019 – Januari 2020 | Kota Serang, Banten</p>
+        <ul>
+            <li>Mendorong peningkatan kapasitas penelitian anggota melalui pelatihan riset kualitatif dan kuantitatif.
+            </li>
+            <li>Membuat konten digital (flyer, video, caption) untuk Instagram @ukmprimauinsmhbanten, meningkatkan
+                1.000 followers.
+            </li>
+        </ul>
+    </div>
+
+    <!-- Pergerakan Mahasiswa Islam Indonesia  -->
+    <div class="mb-5">
+    <h5 class="fw-bold">Pergerakan Mahasiswa Islam Indonesia  </h5>
+    <p class="mb-1"><strong>Ketua Bidang Kajian </strong> — Januari 2018 – Januari 2019 | Kota Serang, Banten</p>
+        <ul>
+            <li>Menyusun agenda dan memilih pembicara kajian rutin mingguan dengan tema politik, hukum, pendidikan, dan
+            ekonomi.
+            </li>
+        </ul>
+    </div>
+
+    <!-- Keluarga Mahasiswa Pandeglang Banten  -->
+    <div class="mb-5">
+    <h5 class="fw-bold">Keluarga Mahasiswa Pandeglang Banten </h5>
+    <p class="mb-1"><strong>Ketua Bidang Advokasi </strong> — Januari 2018 – Januari 2019 | Kota Serang, Banten</p>
+        <ul>
+            <li>Menyelenggarakan bakti sosial untuk korban banjir bandang Lebak dan open donasi “Peduli Banjir Pandeglang Banten”
+            </li>
+            <li>Mengarahkan kaderisasi dengan pengabdian langsung ke 4 kecamatan, hasilnya dituangkan dalam
+                artikel/makalah., untuk selanjutnya hasil pembelajaran tersebut dibuat dalam bentuk artikel atau makalah yang
+                dipresentasikan.
+            </li>
+        </ul>
+    </div>
+    <!-- Offcanvas Sidebar (untuk HP) -->
+    <div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-warning" id="offcanvasSidebarLabel">Profile</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="text-center">
+        <img src="img/profile.jpg" class="rounded-circle mb-3 border border-warning border-3" alt="Foto Profil" width="120" height="120">
+        <h4 class="text-warning">Nama Lengkap</h4>
+        <p class="text-warning">Pengacara </p>
         </div>
-      </div>
+        <hr class="border-light">
+        <h5 class="text-warning">Contact Me</h5>
+        <p>Email: setiawanjodif@gmail.com</p>
+        <p>Phone: 0838 1361 9494</p>
+        <p>Location: Jakarta</p>
+    
+        <h5 class="text-warning">Education</h5>
+        <p><strong>2017 – 2022</strong> -  UIN Banten<br><ul><li>Hukum Tata Negara</li></ul></p>
+        <p><strong>2014 - 2017</strong> - MA Al-Ihya Kaduronyok Cisata<br><ul><li>Ilmu Pengetahuan Sosial</li></ul></p>
+
+        <h5 class="text-warning">Professional Education</h5>
+      <p><strong>Juni 2025</strong>  <ul> <li>Sumpah Advokat Pengadilan Tinggi Banten PERADI SAI Kota Serang, Banten</li></ul>  </p>
+      <p><strong>Mei 2025</strong>  <ul> <li>Pendidikan Mediator Non Hakim oleh FHP Mediasi Jakarta</li></ul> </p>
+            <p><strong>Mei 2025</strong>  <ul> <li>Mengikuti Pembekalan Standar Penanganan Perkara dan Kode Etik Advokat diselenggarakan oleh
+            LBH DPP BAPEKSI</li></ul> </p>
+      <p><strong>Januari 2025</strong>  <ul> <li>Lulus Ujian Profesi Advokat PERADI Suara Advokat Indonesia (SAI) Jakarta Barat</li></ul> </p>
+      <p><strong>Agustus 2024</strong>  <ul> <li> Pendidikan Khusus Profesi Advokat PERADI Kota Serang, Banten</li></ul></p>
+
+        <h5 class="text-warning">Hard Skills</h5>
+        <ul>
+            <li>Advokasi dan Mediasi</li>
+            <li>Legal Drafting dan Litigasi</li>
+            <li>Penelitian dan Analisis Hukum</li>
+            <li>Konten Edukasi Hukum dan Komunikasi Publik</li>
+            <li>Penulisan dan Jurnalistik</li>
+            <li>Video Editing dan Desain Grafis</li>
+            <li>Microsoft Office</li>
+        </ul>
+
+        <h5 class="text-warning">Soft Skills</h5>
+        <ul>
+            <li>Manajemen Organisasi dan Kepemimpinan</li>
+            <li>Public Speaking dan Penyuluhan Hukum</li>
+            <li>Kreativitas </li>
+            <li>Problem Solving</li>
+        </ul>
     </div>
-
-    <!-- Footer Content -->
-    <div class="row g-5">
-      <!-- Logo & Brand -->
-      <div class="col-md-6 col-lg-6 col-xl-3">
-        <div class="footer-item d-flex flex-column">
-          <h3 class="text-white mb-4">
-            <img src="img/wr.png" alt="Logo" style="max-height: 45px;" class="me-2">
-            smc.lawfirm
-          </h3>
-          <p class="text-secondary">Professional legal services with integrity and dedication.</p>
-        </div>
-      </div>
-
-      <!-- About -->
-      <div class="col-md-6 col-lg-6 col-xl-3">
-        <div class="footer-item d-flex flex-column">
-          <h4 class="text-white mb-4">About Us</h4>
-          <p class="mb-3 text-secondary">
-            We are a trusted law firm providing services in corporate, litigation, and consultation. 
-            Our team is committed to delivering tailored solutions for our clients.
-          </p>
-        </div>
-      </div>
-
-      <!-- Business Hours -->
-       <a href="https://wa.me/6281234567890" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp text-success"></i>
-        </a>
-      <div class="col-md-6 col-lg-6 col-xl-3">
-        <div class="footer-item d-flex flex-column">
-          <h4 class="text-white mb-4">Business Hours</h4>
-          <div class="mb-3">
-            <h6 class="text-secondary mb-0">Mon - Friday:</h6>
-            <p class="text-secondary mb-0">09.00 am – 07.00 pm</p>
-          </div>
-          <div class="mb-3">
-            <h6 class="text-secondary mb-0">Saturday:</h6>
-            <p class="text-secondary mb-0">10.00 am – 05.00 pm</p>
-          </div>
-          <div class="mb-3">
-            <h6 class="text-secondary mb-0">Sunday:</h6>
-            <p class="text-secondary mb-0">Closed</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Contact -->
-      <div class="col-md-6 col-lg-6 col-xl-3">
-        <div class="footer-item d-flex flex-column">
-          <h4 class="text-white mb-4">Contact Info</h4>
-          <a href="#" class=" mb-2 text-secondary"><i class="fa fa-map-marker-alt me-2 text-secondary"></i> Jl. Sudirman No. 123, Jakarta</a>
-          <a href="mailto:info@smclawfirm.com" class="text-secondary mb-2"><i class="fas fa-envelope me-2 text-gold"></i> info@smclawfirm.com</a>
-          <a href="tel:+6281234567890" class="text-secondary mb-2"><i class="fas fa-phone me-2 text-gold"></i> +62 812 3456 7890</a>
-          <a href="tel:+6281234567890" class="text-secondary mb-3"><i class="fas fa-print me-2 text-gold"></i> +62 812 3456 7890</a>
-          <p class="text-white"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.75362242738!2d106.82327517363963!3d-6.296073761618772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3b69208f7bd%3A0x13f7eb9520cd483e!2sAD%20Premier!5e0!3m2!1sid!2sid!4v1758728467011!5m2!1sid!2sid" width="250" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
-        </div>
-      </div>
     </div>
-
-    <!-- Bottom -->
-    <div class="text-center pt-4 mt-4 border-top border-secondary">
-      <p class="mb-0 text-white">&copy; 2025 SMC Lawfirm. All Rights Reserved.</p>
-    </div>
+    </main>
   </div>
 </div>
-<!-- Footer End -->
-
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
