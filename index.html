@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Personal Profile</title>
+  <style>
+    .summary {
+      text-align: justify;
+      text-justify: inter-word;
+      -webkit-text-align-last: left;
+      text-align-last: left;
+      hyphens: auto;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 576px) {
+      .summary {
+        font-size: 0.98rem;
+      }
+    }
+
+    /* --- FIXED LAYOUT --- */
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+    /* Sidebar kiri tetap fixed */
+    nav.sidebar-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      width: 25%; /* sama dengan col-md-3 */
+    }
+
+    /* Konten kanan scroll */
+    main.content {
+      margin-left: 25%; /* kasih jarak sesuai lebar sidebar */
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .timeline {
+    position: relative;
+    padding-left: 40px;
+    border-left: 2px solid #ddd;
+    }
+
+    .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    }
+
+    .timeline-dot {
+    position: absolute;
+    left: -9px;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    background: #0d6efd;
+    border-radius: 50%;
+    }
+
+    .timeline-content {
+    padding-left: 10px;
+    }
+
+    /* Responsif untuk HP */
+    @media (max-width: 768px) {
+      nav.sidebar-fixed {
+        position: static;
+        width: 100%;
+        height: auto;
+      }
+      main.content {
+        margin-left: 0;
+      }
+    }
+  </style>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://fontawesome.com" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar kiri -->
+    <nav class="sidebar-fixed bg-dark text-light p-4 d-none d-md-block">
+      <div class="text-center">
+        <img src="img/profile.jpg" class="rounded-circle mb-3 border border-warning border-3" alt="Foto Profil" width="200" height="200">
+        <h4 class="text-warning">Syahril Hidayat</h4>
+        <p class="text-warning">Full Stack Developer</p>
+      </div>
+      <hr class="border-light">
+      <h5 class="text-warning">Contact Me</h5>
+      <p><i class="fa fa-phone"></i>  +62 8XX-XXXX-XXXX</p>
+      <p><i class="fa fa-location"></i> Jakarta</p>
+      
+      <h5 class="text-warning">Education</h5>
+      <p><strong>2018 – 2023</strong> -  Universitas Pamulang<br><ul><li>Teknik Informatika</li></ul></p>
+      <p><strong>2014 - 2017</strong> - SMK Babunnajah<br><ul><li>Rekayasa Perangkat Lunak</li></ul></p>
+
+      <h5 class="text-warning">Hard Skills</h5>
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>PHP</li>
+        <li>Bootstrap</li>
+        <li>Codeigniter</li>
+        <li>Laravel</li>
+        <li>Vue</li>
+        <li>Flutter</li>
+        <li>Mysql</li>
+        <li>Sql Server</li>
+        <li>PostgreSql</li>
+      </ul>
+
+      <h5 class="text-warning">Soft Skills</h5>
+      <ul>
+        <li>Berfikir kritis dan kreatif</li>
+        <li>Manajement waktu</li>
+        <li>Adaptasi dan fleksibel </li>
+        <li>Komunikasi</li>
+        <li>Penyelesaian masalah</li>
+      </ul>
+    </nav>
+
+    <!-- Konten kanan -->
+    <main class="content col-md-9 p-4 bg-light">
+      <!-- Tombol sidebar untuk HP -->
+      <button class="btn btn-default mb-3 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+        ☰ 
+      </button>
+
+      <h2 class="mb-4">SYAHRIL HIDAYAT <hr></h2>
+        <h5 class="text-muted">Tentang Saya</h5>
+        <p class="summary">
+            Programmer dengan pengalaman sejak tahun 2022 yang berfokus pada pengembangan aplikasi berbasis web dan sistem internal perusahaan. Berpengalaman dalam merancang dan mengembangkan berbagai sistem seperti ERP, Marketplace, POS SaaS, dan HRIS untuk mendukung proses bisnis perusahaan. Menguasai teknologi seperti PHP, Laravel, CodeIgniter, JavaScript, Vue.js, dan Flutter serta berbagai database seperti MySQL, SQL Server, dan PostgreSQL. Terbiasa melakukan analisis kebutuhan sistem, mengembangkan fitur aplikasi, serta melakukan maintenance dan pengembangan sistem agar berjalan optimal. Mampu bekerja secara mandiri maupun dalam tim serta memiliki kemampuan belajar teknologi baru dengan cepat.
+        </p>
+
+        <!-- LBH PKC -->
+        <div class="mb-5">
+            <h5 class="fw-bold">Pengalaman Kerja</h5>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>PT PANGANSARI UTAMA </B>- Programmer (HRIS & Internal Systems).</small>
+                    <ul>
+                        <li>
+                            <p>Bertanggung jawab atas pengembangan dan pemeliharaan HRIS (Sistem Informasi Sumber Daya Manusia) perusahaan, yang mencakup manajemen data karyawan, kehadiran, cuti, dukungan penggajian, dan pelaporan (web & mobile).</p>
+                        </li>
+                        <li>
+                            <p>Merancang dan mengembangkan sistem internal.</p> 
+                        </li>
+                        <li>
+                            <p>Mengumpulkan dan menganalisis persyaratan dari tim SDM dan operasional untuk menerjemahkan proses bisnis ke dalam solusi teknis.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>Universitas Pamulang </B>- Skripsi (2023).</small>
+                    <ul>
+                        <li>
+                            <p>
+                                Aplikasi Absensi Karyawan Dengan Location dan Kamera 
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>PT Begawan Avaloka Indonesia Konsultama </B>- Programmer (Feb - Agust 2023).</small>
+                    <ul>
+                        <li>
+                            <p>
+                                Marketplace & POS System Development
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Merancang dan mengembangkan Sistem Marketplace berbasis Web, termasuk manajemen produk, pemrosesan transaksi, manajemen pengguna, dan fitur pelaporan.
+                            </p> 
+                        </li>
+                        <li>
+                            <p>
+                                Mengembangkan Sistem SaaS POS (Point of Sale) berbasis Web, yang mendukung akses multi-pengguna, transaksi penjualan, manajemen inventaris, dan pelaporan waktu nyata.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>PT Kemas Indah Maju </B>- Programmer (Feb - 2022 - 2023).</small>
+                    <ul>
+                        <li>
+                            <p>
+                                ERP System Development (Web-Based)
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Designed and developed a Web-based ERP (Enterprise Resource Planning) System to integrate core business processes including finance, inventory, procurement, sales, and reporting.
+                            </p> 
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>CV Permata Printing </B>- Kuliah Kerja Praktek (2021).</small>
+                    <ul>
+                        <li>
+                            <p>
+                                Membuat aplikasi Inventory Barang
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>Karya Sejahtera Motor </B>- Marketing (2017 - 2019).</small>
+                    <ul>
+                        <li>
+                            <p>
+                                Melakukan penjualan sepeda motor yamaha sesuai target yang diberikan
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>SMK Banunnajah </B>- Asisten Lab Komputer (2016).</small>
+                    <ul>
+                        <li>
+                            <p>
+                                Melakukan perbaikan dan instalasi komputer dan jaringan agar semua berjalan dengan baik
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>SMK Banunnajah </B>- Asisten  IT Center (PKL) (2016).</small>
+                    <ul>
+                        <li>
+                            <p>
+                                Melakukan perbaikan dan instalasi komputer dan jaringnan agar semua berjalan dengan baik
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>ASAKOM </B>- Teknisi Komputer (2016).</small>
+                    <ul>
+                        <li>
+                            <p>
+                                Melakukan perbaikan dan instalasi komputer
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <h5 class="fw-bold">Sertifikat</h5>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>BNSP </B></small>
+                    <ul>
+                        <li>
+                            <p>
+                                Sertifikat kompotensi Garuda dari BNSP
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>SOLO LEARN </B> </small>
+                    <ul>
+                        <li>
+                            <p>
+                                Pelatihan HTML, CSS, JavaScript and PHP
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>UNIVERSITAS AISYIYAH SURAKARTA </B> </small>
+                    <ul>
+                        <li>
+                            <p>
+                                Kontribusi meningkatkan sistem keamanan website
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>UNIVERSITAS KRISTEN PETRA </B>- </small>
+                    <ul>
+                        <li>
+                            <p>
+                                Surat terimakasih atas kontribusi meningkatkan sistem keamanan website
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>CISCO X UNIV WIDYATAMA </B></small>
+                    <ul>
+                        <li>
+                            <p>
+                                Pendahuluan tentang keamanan Cyber
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>NIXTRAIN </B></small>
+                    <ul>
+                        <li>
+                            <p>
+                                Training Mastering Cisco Packet Tracer Online
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <h5 class="fw-bold">Projects</h5>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>System Inventori </B></small>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>Website Course </B></small>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>Aplikasi Penjualan Tiket</B></small>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>Web Pantau Penyebaran Corona </B></small>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>System Posyandu</B></small>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>Analisis Penyakit Kucing Metode Forward Chaining </B></small>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>Interbox.id</B></small>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <pDesigned class="timeline-content">
+                    <small><B>HRIS System </B></small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 mb-5 text-center justify-content-center">
+            <div class="col">
+                <h1>
+                    <a href="https://www.facebook.com/syahril.nakopos/" target="_blank">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                </h1>
+            </div>
+            <div class="col">
+                <h1>
+                    <a href="https://www.instagram.com/syahril_hidayat28/" target="_blank" class="text-danger">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </h1>
+            </div>
+            <div class="col">
+                <h1>
+                    <a href="https://twitter.com/SyahrilHidaya17" target="_blank">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                </h1>
+            </div>
+            <div class="col">
+                <h1>
+                    <a href="https://www.linkedin.com/in/syahrilhidayat28/" target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                </h1>
+            </div>
+        </div>
+
+        <div class="footer bg-dark text-white text-center py-3">
+            <p class="mb-0">
+                © 28 Agust 1999 - <span class="tanggal"></span><br> Syahril Hidayat All. Rights Reserved.
+            </p>
+        </div>
+
+        <!-- Untuk Tampilan Mobile -->
+        <!-- Offcanvas Sidebar (untuk HP) -->
+        <div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title text-warning" id="offcanvasSidebarLabel">Profile</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="text-center">
+                <img src="img/profile.jpg" class="rounded-circle mb-3 border border-dark border-3" alt="Foto Profil" width="120" height="120">
+                <h4 class="text-warning">SYAHRIL HIDAYAT</h4>
+                <p class="text-warning">FULL STACK DEVELOPER</p>
+                </div>
+                <hr class="border-light">
+                <h5 class="text-warning">Contact Me</h5>
+                <p><i class="fa fa-phone"></i>  +62 8XX-XXXX-XXXX</p>
+                <p><i class="fa fa-location"></i> Indonesia</p>
+                
+                <h5 class="text-warning">Education</h5>
+                <p><strong>2018 – 2023</strong> -  Universitas Pamulang<br><ul><li>Teknik Informatika</li></ul></p>
+                <p><strong>2014 - 2017</strong> - SMK Babunnajah<br><ul><li>Rekayasa Perangkat Lunak</li></ul></p>
+
+                <h5 class="text-warning">Hard Skills</h5>
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>PHP</li>
+                    <li>Bootstrap</li>
+                    <li>Codeigniter</li>
+                    <li>Laravel</li>
+                    <li>Vue</li>
+                    <li>Flutter</li>
+                    <li>Mysql</li>
+                    <li>Sql Server</li>
+                    <li>PostgreSql</li>
+                </ul>
+                <h5 class="text-warning">Soft Skills</h5>
+                <ul>
+                    <li>Berfikir kritis dan kreatif</li>
+                    <li>Manajement waktu</li>
+                    <li>Adaptasi dan fleksibel </li>
+                    <li>Komunikasi</li>
+                    <li>Penyelesaian masalah</li>
+                </ul>
+                <div class="row mt-5 text-center justify-content-center">
+                    <div class="col">
+                        <h1>
+                            <a href="https://www.facebook.com/syahril.nakopos/" target="_blank">
+                                <i class="fa-brands fa-facebook"></i>
+                            </a>
+                        </h1>
+                    </div>
+                    <div class="col">
+                        <h1>
+                            <a href="https://www.instagram.com/syahril_hidayat28/" target="_blank" class="text-danger">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                        </h1>
+                    </div>
+                    <div class="col">
+                        <h1>
+                            <a href="https://twitter.com/SyahrilHidaya17" target="_blank">
+                                <i class="fa-brands fa-twitter"></i>
+                            </a>
+                        </h1>
+                    </div>
+                    <div class="col">
+                        <h1>
+                            <a href="https://www.linkedin.com/in/syahrilhidayat28/" target="_blank">
+                                <i class="fa-brands fa-linkedin"></i>
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+                <div class="footer  text-white text-center py-3">
+                    <p class="mb-0">
+                        © 28 Agust 99 - <span class="tanggal"></span> <br> Syahril Hidayat.  All Rights Reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const today = new Date();
+
+    let day = String(today.getDate()).padStart(2,'0');
+    let year = today.getFullYear();
+
+    const months = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+    let month = months[today.getMonth()];
+
+    let tanggal = day + " " + month + " " + year;
+
+    document.querySelectorAll(".tanggal").forEach(el => {
+        el.innerHTML = tanggal;
+    });
+</script>
+</body>
+</html>
+<!--  -->
