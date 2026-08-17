@@ -1,549 +1,791 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Personal Profile</title>
-  <style>
-    .summary {
-      text-align: justify;
-      text-justify: inter-word;
-      -webkit-text-align-last: left;
-      text-align-last: left;
-      hyphens: auto;
-      line-height: 1.7;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syahril Hidayat — Full Stack Developer</title>
+<meta name="description" content="Syahril Hidayat, Full Stack Developer yang membangun sistem ERP, POS, Marketplace, dan HRIS untuk perusahaan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e17;
+    --surface:#111827;
+    --surface-2:#182136;
+    --border:#26314a;
+    --border-soft:#1c253b;
+    --text:#e9edf6;
+    --text-muted:#8b94ac;
+    --text-faint:#5c6580;
+    --accent:#46d9c9;
+    --accent-dim:#2c8d82;
+    --accent-soft:rgba(70,217,201,.10);
+    --amber:#e8a33d;
+    --amber-soft:rgba(232,163,61,.12);
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+    --sidebar-w: 300px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-soft);color:var(--accent);}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px;}
+
+  /* ---------- background grid texture ---------- */
+  body{
+    background-image:
+      linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  .wrap{
+    display:grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height:100vh;
+  }
+
+  /* ================= SIDEBAR ================= */
+  .sidebar{
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+    border-right:1px solid var(--border-soft);
+    background:linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+    padding:36px 28px 28px;
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+    scrollbar-width:thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .sidebar::-webkit-scrollbar{width:6px;}
+  .sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+
+  .profile-block{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;}
+  .avatar-ring{
+    width:120px;height:120px;border-radius:50%;
+    margin:0 auto;
+    padding:3px;
+    background:conic-gradient(from 180deg, var(--accent), var(--amber), var(--accent));
+    flex-shrink:0;
+  }
+  .avatar-ring img{
+    width:100%;height:100%;border-radius:50%;object-fit:cover;
+    border:3px solid var(--bg);
+    background:var(--surface-2);
+  }
+  .id-name{font-family:var(--font-display);font-size:1.35rem;font-weight:700;letter-spacing:-0.01em;}
+  .id-role{font-family:var(--font-mono);font-size:.78rem;color:var(--accent);letter-spacing:.03em;margin-top:2px;}
+
+  .status-pill{
+    display:inline-flex;align-items:center;gap:7px;
+    font-family:var(--font-mono);font-size:.7rem;letter-spacing:.04em;
+    color:var(--accent);
+    background:var(--accent-soft);
+    border:1px solid rgba(70,217,201,.25);
+    padding:6px 10px;border-radius:20px;
+    width:fit-content;
+  }
+  .status-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+  @media (prefers-reduced-motion: reduce){.status-dot{animation:none;}}
+
+  .side-block-title{
+    font-family:var(--font-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--text-faint);margin-bottom:10px;
+  }
+
+  .contact-list{display:flex;flex-direction:column;gap:8px;}
+  .contact-list li{font-size:.85rem;color:var(--text-muted);display:flex;gap:9px;align-items:center;}
+  .contact-list svg{flex-shrink:0;color:var(--accent);}
+
+  nav.side-nav{display:flex;flex-direction:column;gap:2px;}
+  nav.side-nav a{
+    font-size:.85rem;color:var(--text-muted);padding:8px 10px;border-radius:6px;
+    display:flex;align-items:center;gap:10px;transition:background .15s ease, color .15s ease;
+    font-family:var(--font-mono);
+  }
+  nav.side-nav a:hover{background:var(--surface-2);color:var(--text);}
+  nav.side-nav a .n{color:var(--text-faint);font-size:.75rem;}
+
+  .social-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .social-row a{
+    width:34px;height:34px;border-radius:8px;border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--text-muted);
+    transition:border-color .15s ease, color .15s ease, transform .15s ease;
+  }
+  .social-row a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+
+  .sidebar-footer{margin-top:auto;font-family:var(--font-mono);font-size:.68rem;color:var(--text-faint);}
+
+  /* mobile topbar */
+  .topbar{display:none;}
+
+  /* ================= MAIN ================= */
+  main{padding:56px 56px 40px;max-width:920px;}
+  section{margin-bottom:88px;scroll-margin-top:24px;}
+  .eyebrow{
+    font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  }
+  .eyebrow::before{content:'';width:18px;height:1px;background:var(--accent);}
+  h2.section-title{
+    font-family:var(--font-display);font-size:1.7rem;font-weight:700;letter-spacing:-0.01em;margin-bottom:22px;
+  }
+
+  /* ---- hero ---- */
+  .hero{padding-top:8px;}
+  .hero-kicker{font-family:var(--font-mono);color:var(--text-faint);font-size:.85rem;margin-bottom:10px;}
+  .hero h1{
+    font-family:var(--font-display);font-weight:700;font-size:clamp(2.1rem, 4.2vw, 3.3rem);
+    line-height:1.12;letter-spacing:-0.02em;max-width:14ch;
+  }
+  .hero h1 .accent-word{color:var(--accent);}
+  .hero-sub{color:var(--text-muted);max-width:56ch;margin-top:18px;font-size:1.02rem;}
+
+  .status-card{
+    margin-top:36px;
+    border:1px solid var(--border);border-radius:12px;
+    background:var(--surface);overflow:hidden;
+  }
+  .status-card-head{
+    display:flex;align-items:center;gap:8px;padding:10px 16px;
+    border-bottom:1px solid var(--border-soft);background:var(--surface-2);
+    font-family:var(--font-mono);font-size:.72rem;color:var(--text-faint);
+  }
+  .status-card-head .traffic{display:flex;gap:6px;margin-right:6px;}
+  .traffic span{width:9px;height:9px;border-radius:50%;background:var(--border);}
+  .status-card-body{padding:18px 20px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  .status-item .k{font-family:var(--font-mono);font-size:.68rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
+  .status-item .v{font-family:var(--font-mono);font-size:.86rem;color:var(--text);}
+  .status-item .v.ok{color:var(--accent);}
+
+  .stack-breakdown{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+    padding:16px 20px 20px;border-top:1px solid var(--border-soft);
+  }
+  .stack-col .k{font-family:var(--font-mono);font-size:.68rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+  .stack-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .stack-tags .tag{font-size:.72rem;padding:4px 9px;}
+
+  @media (max-width:900px){
+    .stack-breakdown{grid-template-columns:repeat(2,1fr);}
+  }
+
+  @media (max-width:640px){
+    .status-card-body{grid-template-columns:1fr 1fr;}
+    .stack-breakdown{grid-template-columns:1fr;}
+  }
+
+  /* ---- about ---- */
+  .about-text{color:var(--text-muted);max-width:70ch;font-size:1rem;}
+  .about-text strong{color:var(--text);font-weight:600;}
+
+  /* ---- experience: build log ---- */
+  .log{
+    border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface);
+  }
+  .log-header{
+    padding:10px 18px;border-bottom:1px solid var(--border-soft);background:var(--surface-2);
+    font-family:var(--font-mono);font-size:.72rem;color:var(--text-faint);
+    display:flex;justify-content:space-between;
+  }
+  .log-entry{
+    padding:20px 20px;border-bottom:1px solid var(--border-soft);
+    display:grid;grid-template-columns:120px 1fr;gap:18px;
+  }
+  .log-entry:last-child{border-bottom:none;}
+  .log-time{font-family:var(--font-mono);font-size:.75rem;color:var(--amber);padding-top:2px;}
+  .log-main .cmd{font-family:var(--font-mono);font-size:.82rem;color:var(--accent);margin-bottom:6px;}
+  .log-main .cmd span{color:var(--text-faint);}
+  .log-role{font-family:var(--font-display);font-weight:600;font-size:1.02rem;margin-bottom:4px;}
+  .log-org{color:var(--text-muted);font-size:.85rem;margin-bottom:10px;}
+  .log-details{color:var(--text-muted);font-size:.88rem;display:flex;flex-direction:column;gap:5px;}
+  .log-details li{padding-left:16px;position:relative;}
+  .log-details li::before{content:'—';position:absolute;left:0;color:var(--text-faint);}
+
+  @media (max-width:640px){
+    .log-entry{grid-template-columns:1fr;gap:6px;}
+  }
+
+  /* ---- skills ---- */
+  .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .skill-panel{border:1px solid var(--border);border-radius:12px;background:var(--surface);padding:20px;}
+  .skill-panel h3{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:16px;}
+  .tag-cloud{display:flex;flex-wrap:wrap;gap:8px;}
+
+  .skill-subgroups{display:flex;flex-direction:column;gap:18px;}
+  .skill-subgroup{padding-top:16px;border-top:1px solid var(--border-soft);}
+  .skill-subgroup:first-child{padding-top:0;border-top:none;}
+  .subgroup-label{
+    font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:10px;
+  }
+  .tag{
+    font-family:var(--font-mono);font-size:.78rem;padding:6px 11px;border-radius:6px;
+    background:var(--surface-2);border:1px solid var(--border);color:var(--text-muted);
+  }
+  .tag.hard{color:var(--accent);border-color:rgba(70,217,201,.25);}
+  .soft-list{display:flex;flex-direction:column;gap:10px;}
+  .soft-list li{font-size:.88rem;color:var(--text-muted);display:flex;align-items:baseline;gap:10px;}
+  .soft-list li::before{content:'▸';color:var(--amber);font-size:.75rem;}
+
+  @media (max-width:640px){.skills-grid{grid-template-columns:1fr;}}
+
+  /* ---- education ---- */
+  .edu-item{display:flex;gap:20px;padding:16px 0;border-bottom:1px solid var(--border-soft);}
+  .edu-item:last-child{border-bottom:none;}
+  .edu-year{font-family:var(--font-mono);font-size:.78rem;color:var(--amber);width:120px;flex-shrink:0;}
+  .edu-school{font-weight:600;font-size:.98rem;}
+  .edu-major{color:var(--text-muted);font-size:.86rem;margin-top:2px;}
+
+  /* ---- certificates ---- */
+  .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .cert-card{
+    border:1px solid var(--border);border-radius:10px;background:var(--surface);
+    padding:16px 18px;display:flex;flex-direction:column;gap:4px;
+  }
+  .cert-issuer{font-family:var(--font-mono);font-size:.7rem;color:var(--accent);letter-spacing:.05em;}
+  .cert-name{font-size:.9rem;color:var(--text-muted);}
+  @media (max-width:640px){.cert-grid{grid-template-columns:1fr;}}
+
+  /* ---- projects ---- */
+  .project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .project-card{
+    border:1px solid var(--border);border-radius:12px;background:var(--surface);
+    padding:20px;transition:border-color .15s ease, transform .15s ease;
+    position:relative;overflow:hidden;
+  }
+  .project-card:hover{border-color:var(--accent-dim);transform:translateY(-3px);}
+  .project-card::before{
+    content:'';position:absolute;top:0;left:0;width:100%;height:2px;
+    background:linear-gradient(90deg, var(--accent), transparent);
+    opacity:0;transition:opacity .15s ease;
+  }
+  .project-card:hover::before{opacity:1;}
+  .project-index{font-family:var(--font-mono);font-size:.7rem;color:var(--text-faint);margin-bottom:10px;}
+  .project-name{font-family:var(--font-display);font-weight:600;font-size:1.02rem;}
+  @media (max-width:640px){.project-grid{grid-template-columns:1fr;}}
+
+  /* ---- contact / footer ---- */
+  .contact-cta{
+    border:1px solid var(--border);border-radius:14px;background:var(--surface);
+    padding:36px;text-align:left;position:relative;overflow:hidden;
+  }
+  .contact-cta h2{font-family:var(--font-display);font-size:1.6rem;margin-bottom:10px;}
+  .contact-cta p{color:var(--text-muted);max-width:50ch;margin-bottom:22px;}
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-mono);font-size:.82rem;padding:11px 18px;border-radius:8px;
+    display:inline-flex;align-items:center;gap:8px;transition:transform .15s ease, background .15s ease;
+  }
+  .btn-primary{background:var(--accent);color:#04211d;font-weight:600;}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border:1px solid var(--border);color:var(--text-muted);}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+  footer{
+    padding:28px 56px 40px;font-family:var(--font-mono);font-size:.75rem;color:var(--text-faint);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 980px){
+    .wrap{grid-template-columns:1fr;}
+    .sidebar{
+      position:fixed;top:0;left:0;height:100vh;width:82%;max-width:320px;
+      transform:translateX(-100%);transition:transform .25s ease;z-index:60;
+      box-shadow:20px 0 40px rgba(0,0,0,.4);
     }
-
-    @media (max-width: 576px) {
-      .summary {
-        font-size: 0.98rem;
-      }
+    .sidebar.open{transform:translateX(0);}
+    .overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:50;
+      opacity:0;pointer-events:none;transition:opacity .2s ease;
     }
-
-    /* --- FIXED LAYOUT --- */
-    body, html {
-      height: 100%;
-      margin: 0;
+    .overlay.show{opacity:1;pointer-events:auto;}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:16px 20px;border-bottom:1px solid var(--border-soft);
+      position:sticky;top:0;background:rgba(10,14,23,.9);backdrop-filter:blur(8px);z-index:40;
     }
-
-    /* Sidebar kiri tetap fixed */
-    nav.sidebar-fixed {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      overflow-y: auto;
-      width: 25%; /* sama dengan col-md-3 */
+    .topbar .tb-id{display:flex;align-items:center;gap:10px;}
+    .topbar .tb-id img{width:34px;height:34px;border-radius:50%;object-fit:cover;}
+    .topbar .tb-name{font-family:var(--font-display);font-weight:700;font-size:.95rem;}
+    .burger{
+      width:38px;height:38px;border:1px solid var(--border);border-radius:8px;
+      display:flex;align-items:center;justify-content:center;color:var(--text);background:transparent;
     }
+    main{padding:36px 22px 20px;}
+    section{margin-bottom:60px;}
+    footer{padding:24px 22px 32px;flex-direction:column;}
+  }
 
-    /* Konten kanan scroll */
-    main.content {
-      margin-left: 25%; /* kasih jarak sesuai lebar sidebar */
-      height: 100vh;
-      overflow-y: auto;
-    }
-
-    .timeline {
-    position: relative;
-    padding-left: 40px;
-    border-left: 2px solid #ddd;
-    }
-
-    .timeline-item {
-    position: relative;
-    margin-bottom: 20px;
-    }
-
-    .timeline-dot {
-    position: absolute;
-    left: -9px;
-    top: 5px;
-    width: 15px;
-    height: 15px;
-    background: #0d6efd;
-    border-radius: 50%;
-    }
-
-    .timeline-content {
-    padding-left: 10px;
-    }
-
-    /* Responsif untuk HP */
-    @media (max-width: 768px) {
-      nav.sidebar-fixed {
-        position: static;
-        width: 100%;
-        height: auto;
-      }
-      main.content {
-        margin-left: 0;
-      }
-    }
-  </style>
-
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="https://fontawesome.com" crossorigin="anonymous"></script>
-
+  @media (max-width:640px){
+    .project-grid{grid-template-columns:1fr;}
+  }
+</style>
 </head>
 <body>
 
-<div class="container-fluid">
-  <div class="row">
-    <!-- Sidebar kiri -->
-    <nav class="sidebar-fixed bg-dark text-light p-4 d-none d-md-block">
-      <div class="text-center">
-        <img src="img/profile.jpg" class="rounded-circle mb-3 border border-warning border-3" alt="Foto Profil" width="200" height="200">
-        <h4 class="text-warning">Syahril Hidayat</h4>
-        <p class="text-warning">Full Stack Developer</p>
+<div class="overlay" id="overlay"></div>
+
+<div class="wrap">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="profile-block">
+      <div class="avatar-ring">
+        <img src="img/profile.png" alt="Foto profil Syahril Hidayat" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23182136%22/><text x=%2250%22 y=%2258%22 font-size=%2236%22 fill=%22%2346d9c9%22 text-anchor=%22middle%22 font-family=%22monospace%22>SH</text></svg>'">
       </div>
-      <hr class="border-light">
-      <h5 class="text-warning">Contact Me</h5>
-      <p><i class="fa fa-phone"></i>  +62 8XX-XXXX-XXXX</p>
-      <p><i class="fa fa-location"></i> Jakarta</p>
-      
-      <h5 class="text-warning">Education</h5>
-      <p><strong>2018 – 2023</strong> -  Universitas Pamulang<br><ul><li>Teknik Informatika</li></ul></p>
-      <p><strong>2014 - 2017</strong> - SMK Babunnajah<br><ul><li>Rekayasa Perangkat Lunak</li></ul></p>
+      <div>
+        <div class="id-name">Syahril Hidayat</div>
+        <div class="id-role">FULL STACK DEVELOPER</div>
+      </div>
+      <span class="status-pill"><span class="status-dot"></span> open_to_work: false</span>
+    </div>
 
-      <h5 class="text-warning">Hard Skills</h5>
-      <ul>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>JavaScript</li>
-        <li>PHP</li>
-        <li>Bootstrap</li>
-        <li>Codeigniter</li>
-        <li>Laravel</li>
-        <li>Vue</li>
-        <li>Flutter</li>
-        <li>Mysql</li>
-        <li>Sql Server</li>
-        <li>PostgreSql</li>
+    <div>
+      <div class="side-block-title">Contact</div>
+      <ul class="contact-list">
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +62 8xx-xxxx-xxxx</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Jakarta, Indonesia</li>
       </ul>
+    </div>
 
-      <h5 class="text-warning">Soft Skills</h5>
-      <ul>
-        <li>Berfikir kritis dan kreatif</li>
-        <li>Manajement waktu</li>
-        <li>Adaptasi dan fleksibel </li>
-        <li>Komunikasi</li>
-        <li>Penyelesaian masalah</li>
-      </ul>
-    </nav>
+    <div>
+      <div class="side-block-title">Navigasi</div>
+      <nav class="side-nav">
+        <a href="#about"><span class="n">01</span> Tentang</a>
+        <a href="#experience"><span class="n">02</span> Pengalaman</a>
+        <a href="#skills"><span class="n">03</span> Keahlian</a>
+        <a href="#education"><span class="n">04</span> Pendidikan</a>
+        <a href="#certificates"><span class="n">05</span> Sertifikat</a>
+        <a href="#projects"><span class="n">06</span> Proyek</a>
+        <a href="#contact"><span class="n">07</span> Kontak</a>
+      </nav>
+    </div>
 
-    <!-- Konten kanan -->
-    <main class="content col-md-9 p-4 bg-light">
-      <!-- Tombol sidebar untuk HP -->
-      <button class="btn btn-default mb-3 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
-        ☰ 
-      </button>
+    <div>
+      <div class="side-block-title">Sosial</div>
+      <div class="social-row">
+        <a href="https://www.linkedin.com/in/syahrilhidayat28/" aria-label="LinkedIn" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://www.instagram.com/syahril_hidayat28/" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://twitter.com/SyahrilHidaya17" aria-label="Twitter" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/syahril.nakopos/" aria-label="Facebook" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
 
-      <h2 class="mb-4">SYAHRIL HIDAYAT <hr></h2>
-        <h5 class="text-muted">Tentang Saya</h5>
-        <p class="summary">
-            Programmer dengan pengalaman sejak tahun 2022 yang berfokus pada pengembangan aplikasi berbasis web dan sistem internal perusahaan. Berpengalaman dalam merancang dan mengembangkan berbagai sistem seperti ERP, Marketplace, POS SaaS, dan HRIS untuk mendukung proses bisnis perusahaan. Menguasai teknologi seperti PHP, Laravel, CodeIgniter, JavaScript, Vue.js, dan Flutter serta berbagai database seperti MySQL, SQL Server, dan PostgreSQL. Terbiasa melakukan analisis kebutuhan sistem, mengembangkan fitur aplikasi, serta melakukan maintenance dan pengembangan sistem agar berjalan optimal. Mampu bekerja secara mandiri maupun dalam tim serta memiliki kemampuan belajar teknologi baru dengan cepat.
-        </p>
+    <div class="sidebar-footer">© 1999–2026 Syahril Hidayat</div>
+  </aside>
 
-        <!-- LBH PKC -->
-        <div class="mb-5">
-            <h5 class="fw-bold">Pengalaman Kerja</h5>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>PT PANGANSARI UTAMA </B>- Programmer (HRIS & Internal Systems).</small>
-                    <ul>
-                        <li>
-                            <p>Bertanggung jawab atas pengembangan dan pemeliharaan HRIS (Sistem Informasi Sumber Daya Manusia) perusahaan, yang mencakup manajemen data karyawan, kehadiran, cuti, dukungan penggajian, dan pelaporan (web & mobile).</p>
-                        </li>
-                        <li>
-                            <p>Merancang dan mengembangkan sistem internal.</p> 
-                        </li>
-                        <li>
-                            <p>Mengumpulkan dan menganalisis persyaratan dari tim SDM dan operasional untuk menerjemahkan proses bisnis ke dalam solusi teknis.</p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>Universitas Pamulang </B>- Skripsi (2023).</small>
-                    <ul>
-                        <li>
-                            <p>
-                                Aplikasi Absensi Karyawan Dengan Location dan Kamera 
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>PT Begawan Avaloka Indonesia Konsultama </B>- Programmer (Feb - Agust 2023).</small>
-                    <ul>
-                        <li>
-                            <p>
-                                Marketplace & POS System Development
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                Merancang dan mengembangkan Sistem Marketplace berbasis Web, termasuk manajemen produk, pemrosesan transaksi, manajemen pengguna, dan fitur pelaporan.
-                            </p> 
-                        </li>
-                        <li>
-                            <p>
-                                Mengembangkan Sistem SaaS POS (Point of Sale) berbasis Web, yang mendukung akses multi-pengguna, transaksi penjualan, manajemen inventaris, dan pelaporan waktu nyata.
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>PT Kemas Indah Maju </B>- Programmer (Feb - 2022 - 2023).</small>
-                    <ul>
-                        <li>
-                            <p>
-                                ERP System Development (Web-Based)
-                            </p>
-                        </li>
-                        <li>
-                            <p>
-                                Designed and developed a Web-based ERP (Enterprise Resource Planning) System to integrate core business processes including finance, inventory, procurement, sales, and reporting.
-                            </p> 
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>CV Permata Printing </B>- Kuliah Kerja Praktek (2021).</small>
-                    <ul>
-                        <li>
-                            <p>
-                                Membuat aplikasi Inventory Barang
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>Karya Sejahtera Motor </B>- Marketing (2017 - 2019).</small>
-                    <ul>
-                        <li>
-                            <p>
-                                Melakukan penjualan sepeda motor yamaha sesuai target yang diberikan
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>SMK Banunnajah </B>- Asisten Lab Komputer (2016).</small>
-                    <ul>
-                        <li>
-                            <p>
-                                Melakukan perbaikan dan instalasi komputer dan jaringan agar semua berjalan dengan baik
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>SMK Banunnajah </B>- Asisten  IT Center (PKL) (2016).</small>
-                    <ul>
-                        <li>
-                            <p>
-                                Melakukan perbaikan dan instalasi komputer dan jaringnan agar semua berjalan dengan baik
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>ASAKOM </B>- Teknisi Komputer (2016).</small>
-                    <ul>
-                        <li>
-                            <p>
-                                Melakukan perbaikan dan instalasi komputer
-                            </p>
-                        </li>
-                    </ul>
-                </div>
+  <!-- ============ MOBILE TOPBAR ============ -->
+  <div class="topbar">
+    <div class="tb-id">
+      <img src="https://syahrilcreative.github.io/img/profile.jpg" alt="" onerror="this.style.display='none'">
+      <span class="tb-name">Syahril Hidayat</span>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Buka menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+
+  <!-- ============ MAIN ============ -->
+  <main>
+
+    <!-- HERO -->
+    <!-- <section class="hero" id="hero">
+      <div class="hero-kicker">$ whoami</div>
+      <h1>Membangun sistem yang <span class="accent-word">menjalankan</span> operasional bisnis, dari kode hingga produksi.</h1>
+      <p class="hero-sub">Full Stack Developer sejak 2022, fokus pada aplikasi berbasis web dan sistem internal perusahaan — ERP, Marketplace, POS SaaS, dan HRIS.</p>
+
+      <div class="status-card">
+        <div class="status-card-head">
+          <div class="traffic"><span></span><span></span><span></span></div>
+          system_status.log
+        </div>
+        <div class="status-card-body">
+          <div class="status-item"><div class="k">Status</div><div class="v ok">● Available</div></div>
+          <div class="status-item"><div class="k">Base</div><div class="v">Jakarta, ID</div></div>
+        </div>
+        <div class="stack-breakdown">
+          <div class="stack-col">
+            <div class="k">Frontend</div>
+            <div class="stack-tags">
+              <span class="tag hard">HTML</span>
+              <span class="tag hard">CSS</span>
+              <span class="tag hard">JavaScript</span>
+              <span class="tag hard">Bootstrap</span>
+              <span class="tag hard">Vue</span>
             </div>
+          </div>
+          <div class="stack-col">
+            <div class="k">Backend</div>
+            <div class="stack-tags">
+              <span class="tag hard">PHP</span>
+              <span class="tag hard">Laravel</span>
+              <span class="tag hard">CodeIgniter</span>
+            </div>
+          </div>
+          <div class="stack-col">
+            <div class="k">Database</div>
+            <div class="stack-tags">
+              <span class="tag hard">MySQL</span>
+              <span class="tag hard">SQL Server</span>
+              <span class="tag hard">PostgreSQL</span>
+            </div>
+          </div>
+          <div class="stack-col">
+            <div class="k">Mobile</div>
+            <div class="stack-tags">
+              <span class="tag hard">Flutter</span>
+              <span class="tag hard">Android</span>
+              <span class="tag hard">iOS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="eyebrow">Tentang Saya</div>
+      <!-- <h2 class="section-title">Programmer </h2> -->
+      <p class="about-text">
+        Programmer dengan pengalaman sejak <strong>2022</strong>, berfokus pada pengembangan aplikasi berbasis web dan sistem internal perusahaan. Berpengalaman merancang dan mengembangkan berbagai sistem seperti <strong>ERP, Marketplace, POS SaaS, dan HRIS</strong> untuk mendukung proses bisnis perusahaan.
+        <br><br>
+        Menguasai <strong>PHP, Laravel, CodeIgniter, JavaScript, Vue.js, dan Flutter</strong> serta basis data seperti MySQL, SQL Server, dan PostgreSQL. Terbiasa melakukan analisis kebutuhan sistem, mengembangkan fitur aplikasi, serta melakukan maintenance agar sistem berjalan optimal — baik secara mandiri maupun dalam tim.
+      </p>
+
+      <div class="status-card">
+        <div class="status-card-head">
+          <div class="traffic"><span></span><span></span><span></span></div>
+          system_status.log
+        </div>
+        <div class="status-card-body">
+          <div class="status-item"><div class="k">Status</div><div class="v ok">● Available</div></div>
+          <div class="status-item"><div class="k">Base</div><div class="v">Jakarta, ID</div></div>
+        </div>
+        <div class="stack-breakdown">
+          <div class="stack-col">
+            <div class="k">Frontend</div>
+            <div class="stack-tags">
+              <span class="tag hard">HTML</span>
+              <span class="tag hard">CSS</span>
+              <span class="tag hard">Vue</span>
+              <span class="tag hard">Nuxt</span>
+              <span class="tag hard">JavaScript</span>
+              <span class="tag hard">Bootstrap</span>
+              
+            </div>
+          </div>
+          <div class="stack-col">
+            <div class="k">Backend</div>
+            <div class="stack-tags">
+              <span class="tag hard">PHP</span>
+              <span class="tag hard">Laravel</span>
+              <span class="tag hard">CodeIgniter</span>
+            </div>
+          </div>
+          <div class="stack-col">
+            <div class="k">Database</div>
+            <div class="stack-tags">
+              <span class="tag hard">MySQL</span>
+              <span class="tag hard">SQL Server</span>
+              <span class="tag hard">PostgreSQL</span>
+            </div>
+          </div>
+          <div class="stack-col">
+            <div class="k">Mobile</div>
+            <div class="stack-tags">
+              <span class="tag hard">Flutter</span>
+              <span class="tag hard">Android</span>
+              <span class="tag hard">iOS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="eyebrow">Pengalaman Kerja</div>
+      <div class="log">
+        <div class="log-header"><span>work_experience.log</span><span>7 entries</span></div>
+        <div class="log-entry">
+          <div class="log-time">2023 — now</div>
+          <div class="log-main">
+            <div class="cmd"><span>$</span>Programmer</div>
+            <div class="log-org">PT Pangansari Utama</div>
+            <ul class="log-details">
+              <li>Mengembangkan dan memelihara HRIS: manajemen data karyawan, kehadiran, cuti, dan pelaporan (web &amp; mobile)</li>
+              <li>Merancang dan mengembangkan sistem internal perusahaan</li>
+              <li>Menganalisis kebutuhan tim SDM menjadi solusi teknis</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="mb-5">
-            <h5 class="fw-bold">Sertifikat</h5>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>BNSP </B></small>
-                    <ul>
-                        <li>
-                            <p>
-                                Sertifikat kompotensi Garuda dari BNSP
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>SOLO LEARN </B> </small>
-                    <ul>
-                        <li>
-                            <p>
-                                Pelatihan HTML, CSS, JavaScript and PHP
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>UNIVERSITAS AISYIYAH SURAKARTA </B> </small>
-                    <ul>
-                        <li>
-                            <p>
-                                Kontribusi meningkatkan sistem keamanan website
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>UNIVERSITAS KRISTEN PETRA </B>- </small>
-                    <ul>
-                        <li>
-                            <p>
-                                Surat terimakasih atas kontribusi meningkatkan sistem keamanan website
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>CISCO X UNIV WIDYATAMA </B></small>
-                    <ul>
-                        <li>
-                            <p>
-                                Pendahuluan tentang keamanan Cyber
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>NIXTRAIN </B></small>
-                    <ul>
-                        <li>
-                            <p>
-                                Training Mastering Cisco Packet Tracer Online
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <div class="log-entry">
+          <div class="log-time">2023</div>
+          <div class="log-main">
+            <div class="cmd"><span>$</span>skripsi</div>
+            <div class="log-role">Tugas Akhir / Skripsi</div>
+            <div class="log-org">Universitas Pamulang</div>
+            <ul class="log-details">
+              <li>Aplikasi Absensi Karyawan dengan Location dan Kamera</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="mb-5">
-            <h5 class="fw-bold">Projects</h5>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>System Inventori </B></small>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>Website Course </B></small>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>Aplikasi Penjualan Tiket</B></small>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>Web Pantau Penyebaran Corona </B></small>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>System Posyandu</B></small>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>Analisis Penyakit Kucing Metode Forward Chaining </B></small>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>Interbox.id</B></small>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <pDesigned class="timeline-content">
-                    <small><B>HRIS System </B></small>
-                </div>
-            </div>
+        <div class="log-entry">
+          <div class="log-time">Feb – Agu 2023</div>
+          <div class="log-main">
+            <div class="cmd"><span>$</span>Programmer</div>
+            <div class="log-org">PT Begawan Avaloka Indonesia Konsultama</div>
+            <ul class="log-details">
+              <li>Sistem Marketplace berbasis web: manajemen produk, transaksi, pengguna, dan pelaporan</li>
+              <li>Sistem SaaS POS multi-pengguna dengan manajemen inventaris &amp; pelaporan</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="row mt-5 mb-5 text-center justify-content-center">
-            <div class="col">
-                <h1>
-                    <a href="https://www.facebook.com/syahril.nakopos/" target="_blank">
-                        <i class="fa-brands fa-facebook"></i>
-                    </a>
-                </h1>
-            </div>
-            <div class="col">
-                <h1>
-                    <a href="https://www.instagram.com/syahril_hidayat28/" target="_blank" class="text-danger">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                </h1>
-            </div>
-            <div class="col">
-                <h1>
-                    <a href="https://twitter.com/SyahrilHidaya17" target="_blank">
-                        <i class="fa-brands fa-twitter"></i>
-                    </a>
-                </h1>
-            </div>
-            <div class="col">
-                <h1>
-                    <a href="https://www.linkedin.com/in/syahrilhidayat28/" target="_blank">
-                        <i class="fa-brands fa-linkedin"></i>
-                    </a>
-                </h1>
-            </div>
+        <div class="log-entry">
+          <div class="log-time">2022 – 2023</div>
+          <div class="log-main">
+            <div class="cmd"><span>$</span>Programmer</div>
+            <div class="log-org">PT Kemas Indah Maju</div>
+            <ul class="log-details">
+              <li>Merancang dan mengembangkan ERP berbasis web</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="footer bg-dark text-white text-center py-3">
-            <p class="mb-0">
-                © 28 Agust 1999 - <span class="tanggal"></span><br> Syahril Hidayat All. Rights Reserved.
-            </p>
+        <div class="log-entry">
+          <div class="log-time">2021</div>
+          <div class="log-main">
+            <div class="cmd"><span>$</span>Kuliah Kerja Praktek</div>
+            <div class="log-org">CV Permata Printing</div>
+            <ul class="log-details">
+              <li>Membuat aplikasi Inventory Barang</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Untuk Tampilan Mobile -->
-        <!-- Offcanvas Sidebar (untuk HP) -->
-        <div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title text-warning" id="offcanvasSidebarLabel">Profile</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <div class="text-center">
-                <img src="img/profile.jpg" class="rounded-circle mb-3 border border-dark border-3" alt="Foto Profil" width="120" height="120">
-                <h4 class="text-warning">SYAHRIL HIDAYAT</h4>
-                <p class="text-warning">FULL STACK DEVELOPER</p>
-                </div>
-                <hr class="border-light">
-                <h5 class="text-warning">Contact Me</h5>
-                <p><i class="fa fa-phone"></i>  +62 8XX-XXXX-XXXX</p>
-                <p><i class="fa fa-location"></i> Indonesia</p>
-                
-                <h5 class="text-warning">Education</h5>
-                <p><strong>2018 – 2023</strong> -  Universitas Pamulang<br><ul><li>Teknik Informatika</li></ul></p>
-                <p><strong>2014 - 2017</strong> - SMK Babunnajah<br><ul><li>Rekayasa Perangkat Lunak</li></ul></p>
-
-                <h5 class="text-warning">Hard Skills</h5>
-                <ul>
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>JavaScript</li>
-                    <li>PHP</li>
-                    <li>Bootstrap</li>
-                    <li>Codeigniter</li>
-                    <li>Laravel</li>
-                    <li>Vue</li>
-                    <li>Flutter</li>
-                    <li>Mysql</li>
-                    <li>Sql Server</li>
-                    <li>PostgreSql</li>
-                </ul>
-                <h5 class="text-warning">Soft Skills</h5>
-                <ul>
-                    <li>Berfikir kritis dan kreatif</li>
-                    <li>Manajement waktu</li>
-                    <li>Adaptasi dan fleksibel </li>
-                    <li>Komunikasi</li>
-                    <li>Penyelesaian masalah</li>
-                </ul>
-                <div class="row mt-5 text-center justify-content-center">
-                    <div class="col">
-                        <h1>
-                            <a href="https://www.facebook.com/syahril.nakopos/" target="_blank">
-                                <i class="fa-brands fa-facebook"></i>
-                            </a>
-                        </h1>
-                    </div>
-                    <div class="col">
-                        <h1>
-                            <a href="https://www.instagram.com/syahril_hidayat28/" target="_blank" class="text-danger">
-                                <i class="fa-brands fa-instagram"></i>
-                            </a>
-                        </h1>
-                    </div>
-                    <div class="col">
-                        <h1>
-                            <a href="https://twitter.com/SyahrilHidaya17" target="_blank">
-                                <i class="fa-brands fa-twitter"></i>
-                            </a>
-                        </h1>
-                    </div>
-                    <div class="col">
-                        <h1>
-                            <a href="https://www.linkedin.com/in/syahrilhidayat28/" target="_blank">
-                                <i class="fa-brands fa-linkedin"></i>
-                            </a>
-                        </h1>
-                    </div>
-                </div>
-                <div class="footer  text-white text-center py-3">
-                    <p class="mb-0">
-                        © 28 Agust 99 - <span class="tanggal"></span> <br> Syahril Hidayat.  All Rights Reserved.
-                    </p>
-                </div>
-            </div>
+        <div class="log-entry">
+          <div class="log-time">2017 – 2019</div>
+          <div class="log-main">
+            <div class="cmd"><span>$</span>Marketing</div>
+            <div class="log-org">Karya Sejahtera Motor</div>
+            <ul class="log-details">
+              <li>Penjualan sepeda motor Yamaha sesuai target yang diberikan.</li>
+              <li>Menjalin hubungan &amp; komunikasi kepada pelanggan</li>
+            </ul>
+          </div>
         </div>
-    </main>
+
+        <div class="log-entry">
+          <div class="log-time">2016</div>
+          <div class="log-main">
+            <div class="cmd"><span>$</span>Asisten Lab Komputer, Asisten IT Center (PKL), Teknisi</div>
+            <div class="log-org">SMK Babunnajah &amp; Toko Komputer ASAKOM</div>
+            <ul class="log-details">
+              <li>Perbaikan dan instalasi komputer dan jaringan</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="eyebrow">Keahlian</div>
+      <h2 class="section-title">Stack &amp; kemampuan kerja</h2>
+
+      <div class="skills-grid">
+        <div class="skill-panel">
+          <h3>Hard Skills</h3>
+          <div class="skill-subgroups">
+            <div class="skill-subgroup">
+              <div class="subgroup-label">Frontend</div>
+              <div class="tag-cloud">
+                <span class="tag hard">HTML</span>
+                <span class="tag hard">CSS</span>
+                <span class="tag hard">JavaScript</span>
+                <span class="tag hard">Bootstrap</span>
+                <span class="tag hard">Vue</span>
+              </div>
+            </div>
+            <div class="skill-subgroup">
+              <div class="subgroup-label">Backend</div>
+              <div class="tag-cloud">
+                <span class="tag hard">PHP</span>
+                <span class="tag hard">Laravel</span>
+                <span class="tag hard">CodeIgniter</span>
+              </div>
+            </div>
+            <div class="skill-subgroup">
+              <div class="subgroup-label">Database</div>
+              <div class="tag-cloud">
+                <span class="tag hard">MySQL</span>
+                <span class="tag hard">SQL Server</span>
+                <span class="tag hard">PostgreSQL</span>
+              </div>
+            </div>
+            <div class="skill-subgroup">
+              <div class="subgroup-label">Mobile</div>
+              <div class="tag-cloud">
+                <span class="tag hard">Flutter</span>
+                <span class="tag hard">Android</span>
+                <span class="tag hard">iOS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="skill-panel">
+          <h3>Soft Skills</h3>
+          <ul class="soft-list">
+            <li>Berpikir kritis dan kreatif</li>
+            <li>Manajemen waktu</li>
+            <li>Adaptasi dan fleksibel</li>
+            <li>Komunikasi</li>
+            <li>Penyelesaian masalah</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="eyebrow">Pendidikan</div>
+      <h2 class="section-title">Latar belakang akademik</h2>
+
+      <div class="edu-item">
+        <div class="edu-year">2018 – 2023</div>
+        <div>
+          <div class="edu-school">Universitas Pamulang</div>
+          <div class="edu-major">Teknik Informatika</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-year">2014 – 2017</div>
+        <div>
+          <div class="edu-school">SMK Babunnajah</div>
+          <div class="edu-major">Rekayasa Perangkat Lunak</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates">
+      <div class="eyebrow">Sertifikat</div>
+      <h2 class="section-title">Pelatihan &amp; pengakuan</h2>
+
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-issuer">BNSP</div>
+          <div class="cert-name">Sertifikat Kompetensi Garuda</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">SoloLearn</div>
+          <div class="cert-name">Pelatihan HTML, CSS, JavaScript &amp; PHP</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">Universitas Aisyiyah Surakarta</div>
+          <div class="cert-name">Kontribusi peningkatan sistem keamanan website</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">Universitas Kristen Petra</div>
+          <div class="cert-name">Apresiasi kontribusi keamanan website</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">Cisco × Univ. Widyatama</div>
+          <div class="cert-name">Pendahuluan Keamanan Cyber</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">NixTrain</div>
+          <div class="cert-name">Mastering Cisco Packet Tracer Online</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="eyebrow">Proyek</div>
+      <h2 class="section-title">Sistem yang pernah dibangun</h2>
+
+      <div class="project-grid">
+        <div class="project-card"><div class="project-index">SYS / 01</div><div class="project-name">Sistem Inventori</div></div>
+        <div class="project-card"><div class="project-index">SYS / 02</div><div class="project-name">Website Course</div></div>
+        <div class="project-card"><div class="project-index">SYS / 03</div><div class="project-name">Aplikasi Penjualan Tiket</div></div>
+        <div class="project-card"><div class="project-index">SYS / 04</div><div class="project-name">Web Pantau Penyebaran Corona</div></div>
+        <div class="project-card"><div class="project-index">SYS / 05</div><div class="project-name">Sistem Posyandu</div></div>
+        <div class="project-card"><div class="project-index">SYS / 06</div><div class="project-name">Analisis Penyakit Kucing — Forward Chaining</div></div>
+        <div class="project-card"><div class="project-index">SYS / 07</div><div class="project-name">Interbox.id</div></div>
+        <div class="project-card"><div class="project-index">SYS / 08</div><div class="project-name">HRIS System</div></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="eyebrow">Kontak</div>
+      <div class="contact-cta">
+        <h2>Mari berkolaborasi</h2>
+        <p>Terbuka untuk peluang kerja, proyek freelance, maupun diskusi seputar pengembangan sistem berbasis web.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://www.linkedin.com/in/syahrilhidayat28/" target="_blank" rel="noopener">Hubungi via LinkedIn</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/syahril_hidayat28/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn btn-ghost" href="https://twitter.com/SyahrilHidaya17" aria-label="Twitter" target="_blank" rel="noopener">Twitter</a>
+          <a class="btn btn-ghost" href="https://www.facebook.com/syahril.nakopos/" target="_blank" rel="noopener">Facebook</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
 </div>
 
+<footer>
+  <span>© 1999–2026 Syahril Hidayat. All rights reserved.</span>
+  <span>Built with HTML · CSS · JS</span>
+</footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const today = new Date();
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  const burger = document.getElementById('burgerBtn');
 
-    let day = String(today.getDate()).padStart(2,'0');
-    let year = today.getFullYear();
-
-    const months = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
-    let month = months[today.getMonth()];
-
-    let tanggal = day + " " + month + " " + year;
-
-    document.querySelectorAll(".tanggal").forEach(el => {
-        el.innerHTML = tanggal;
-    });
+  function toggleMenu(open){
+    sidebar.classList.toggle('open', open);
+    overlay.classList.toggle('show', open);
+  }
+  burger?.addEventListener('click', () => toggleMenu(!sidebar.classList.contains('open')));
+  overlay.addEventListener('click', () => toggleMenu(false));
+  document.querySelectorAll('.side-nav a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
 </script>
+
 </body>
 </html>
-<!--  -->
